@@ -52,6 +52,18 @@ nav{
       width: 100%;
     }
   }
+  .apps {
+    color: #fefefe;
+    font-size: 2rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    i:after{
+      content: inherit;
+    }
+    ul li:hover{
+      background-color: inherit;
+    }
+  }
 
   a{
     color: #fff;
