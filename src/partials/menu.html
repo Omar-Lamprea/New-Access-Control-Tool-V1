@@ -1,29 +1,37 @@
-<div id="sidebarMenu" class="col-3">
-  <nav>
+<div id="sidebarMenu" class="sidebarMenu col-12 col-lg-3">
+  <nav class="d-flex flex-column">
+    <div id="btnDropDown" class="btnDropDown">
+      <i class="fa-solid fa-arrow-right-long"></i>
+    </div>
+
     <div class="logo">
       <a href="/">
         <img src="https://aeronexllc.com/images/logo@2x.png" alt="logo">
       </a>
     </div>
 
-    <ul>
-      <a href="./users.html">
-        <li>
+    <ul id="ulList">
+      <li>
+        <a href="./users.html">
           <i>
             <img src="./img/adduser.png" alt="" width="30">
           </i>
-          ADD PERSON
-        </li>
-      </a>
+          <span>
+            ADMIN USERS
+          </span> 
+        </a>
+      </li>
   
-      <a href="./messages.html">
-        <li>
+      <li>
+        <a href="./messages.html">
           <i>
             <img src="./img/message.png" alt="" width="30">
           </i>
-          MESSAGES
-        </li>
-      </a>
+          <span>
+            MESSAGES
+          </span>
+        </a>
+      </li>
     </ul>
   </nav>
 </div>

@@ -9,6 +9,8 @@ body{
 
 header{
   padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
 
   h1{
     font-size: 2rem;
@@ -19,7 +21,7 @@ header{
     color: #fff;
     border: none;
     border-radius: 20px;
-    padding: 0 .5rem;
+    padding: 1rem 1.5rem;
   }
 }
 
@@ -30,14 +32,14 @@ main {
   .row{
     height: 100%;
   }
-  .col-3{
+  .col-lg-3{
     padding: 0;
   }
 }
 
 nav{
   background-color: #202c56;
-  border-radius: 50px 50px 0 0;
+  border-radius: 30px 30px 0 0;
   height: 100%;
   max-width: 350px;
 
@@ -46,6 +48,7 @@ nav{
     padding: 0 1rem;
     
     img{
+      max-width: 200px;
       width: 100%;
     }
   }
@@ -57,7 +60,23 @@ nav{
   a:hover{
     color: #fff;
   }
-  
+
+  .ulList-closed{
+    padding: 0;
+    transition: all ease .5s;
+    li{
+      padding-left: 0;
+      justify-content: center;
+      a i{
+        margin-right: 0;
+      }
+      a span{
+        opacity: 0%;
+        display: none;
+      }
+    }
+  }
+
   ul li{
     list-style: none;
     padding: .5rem 0;
@@ -106,8 +125,10 @@ main div .users-container-main{
       }
     }
     .alphabet-pager{
+      flex-wrap: wrap;
+      margin: .7rem 0;
       .btn-search{
-        margin: .5rem;
+        margin: .3rem .3rem;
         border: none;
         background-color: #5AE1F8;
         color: #fff;
@@ -166,3 +187,62 @@ main div .users-container-main{
 
 
 //menu
+.sidebarMenu{
+  .btnDropDown{
+    width: min-content;
+    display: flex;
+    align-self: flex-end;
+    margin: 1rem 1rem 0 0;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+  }
+  .btnDropDown-open{
+    transition: all ease .5s;
+    transform: rotate(180deg);
+  }
+  .btnDropDown-closed{
+    transition: all ease .5s;
+    transform: rotate(0deg);
+  }
+}
+
+@media screen and (max-width: '991px') {
+  main{
+    .row{
+      height: 0;
+    }
+  }
+  header{
+    display: block;
+    padding: 1rem 0 !important;
+    h1{
+      font-size: 1.5rem;
+    }
+    button{
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  .users-container-main{
+    padding: 1rem 0 !important;
+
+    .table-users{
+      table{
+        tr td{
+          font-size: .8rem;
+        }
+      }
+    }
+  }
+  nav{
+    max-width: inherit;
+    height: inherit;
+  }
+
+}
+
+
+
+
+
