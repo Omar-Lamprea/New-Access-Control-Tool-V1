@@ -1,4 +1,4 @@
-const pagination = () =>{
+function pagination(){
   const alphabet =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
   const alphabetPager = document.getElementById('alphabet-pager')
   
@@ -9,4 +9,3 @@ const pagination = () =>{
   });
 }
 
-pagination()

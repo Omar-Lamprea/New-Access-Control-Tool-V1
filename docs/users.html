@@ -75,17 +75,27 @@
 
                         <button>Log out</button>
                     </header>
-                    <div class="container-fluid users-container-main">
+                    <div class="container-fluid position-relative users-container-main">
                         <div class="search-container">
-                            <form action="">
-                                <label for="searchUser">Search by Name or Username</label>
-                                <div class="inputSearch d-flex align-items-center justify-content-between">
-                                    <p>Users</p>
-                                    <input type="text" name="searchUser" id="searchUser" placeholder=" Search...">
-                                    <button>Go!</button>
-                                </div>
-                            </form>
+                            <!-- <form id="formSearch"> -->
+                            <label for="searchUser">Search by Name or Username</label>
+                            <div class="inputSearch d-flex align-items-center justify-content-between">
+                                <p>Users</p>
+                                <input type="text" name="searchUser" id="searchUser" placeholder=" Search...">
+                                <button>Go!</button>
+                            </div>
+                            <!-- </form> -->
                             <div id="alphabet-pager" class="alphabet-pager d-flex justify-content-center"></div>
+                        </div>
+                        <div id="loader" class="lds-roller position-absolute" style="right: calc(50% + 40px); top: 50%;">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
                         <div class="table-users">
                             <table id="table-users">

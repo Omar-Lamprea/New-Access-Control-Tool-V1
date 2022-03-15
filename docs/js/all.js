@@ -79,7 +79,13 @@ const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
 // const urlApi = 'https://acsadmin.azurewebsites.net/api/TestUser'
 
 
-const pagination = () =>{
+
+if (window.location.href.includes('/users.html')) {
+  pagination()
+  searchInput()
+  search('A')
+}
+function pagination(){
   const alphabet =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
   const alphabetPager = document.getElementById('alphabet-pager')
   
@@ -90,12 +96,37 @@ const pagination = () =>{
   });
 }
 
-pagination()
-localStorage.setItem('search', 'A')
-const search = async (letter)=>{
 
+function searchInput(){
+  const searchUser = document.getElementById('searchUser')
+  let typingtimer = null;
+
+  searchUser.addEventListener('keyup', e =>{
+
+    if(e.key === 'Escape'){
+      e.target.value = ''
+      // search('A')
+    } 
+    if(e.key === "Enter") search(e.target.value);
+  
+    if(e.target.value === ''){
+      search('A')
+    }else{
+      clearTimeout(typingtimer)
+      typingtimer = setTimeout(() => {
+        search(e.target.value)
+        clearTimeout(typingtimer)
+      }, 1000);
+    }
+  })
+}
+localStorage.setItem('search', 'A')
+async function search(letter){
+  const loader = document.getElementById('loader')
   const table = document.getElementById('table-users')
 
+  loader.classList.remove('d-none')
+  
   for (let i = localStorage.getItem('count'); i > 0; i--) {
     if (table.children[i] !== undefined) {
       table.removeChild(table.children[i])
@@ -107,31 +138,31 @@ const search = async (letter)=>{
 
   const alphabetList = document.getElementsByClassName('btn-search')
   for (let i = 0; i < alphabetList.length; i++) {
-    alphabetList[i].classList.contains('active-search') ? alphabetList[i].classList.remove('active-search') : false
+    if (getUsers.length === 1) {
+      alphabetList[i].classList.contains('active-search') 
+        ? alphabetList[i].classList.remove('active-search') 
+        : false
+
+      const btnEl = document.getElementById(getUsers)
+      btnEl.classList.add('active-search')
+    }
   }
-  const btnEl = document.getElementById(getUsers)
-  btnEl.classList.add('active-search')
+
 
   const getUsersByStartLetter = await(fetch(`${urlApi}/?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`))
   if (getUsersByStartLetter.ok) {
     const content = await getUsersByStartLetter.json()
-
+    
+    loader.classList.add('d-none')
     showUsers(content.data)
   }
 }
 
-search('A')
+
 
 const showUsers = (data)=>{
   // console.log(data);
   const table = document.getElementById('table-users')
-
-  // for (let i = localStorage.getItem('count'); i > 0; i--) {
-  //   if (table.children[i] !== undefined) {
-  //     table.removeChild(table.children[i])
-  //   }
-  // }
-
   data.forEach(user => {
     const row = `
     <tr class="">

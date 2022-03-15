@@ -8,21 +8,23 @@
         <h1>Access Control tool V1</h1>
         <button>Log out</button>
       </header>
-      <div class="container-fluid users-container-main">
+      <div class="container-fluid position-relative users-container-main">
         
         <div class="search-container">
-          <form action="">
+          <!-- <form id="formSearch"> -->
             <label for="searchUser">Search by Name or Username</label>
             <div class="inputSearch d-flex align-items-center justify-content-between">
               <p>Users</p>
               <input type="text" name="searchUser" id="searchUser" placeholder=" Search...">
               <button>Go!</button>
             </div>
-          </form>
+          <!-- </form> -->
 
           <div id="alphabet-pager" class="alphabet-pager d-flex justify-content-center">
           </div>
         </div>
+
+        <partial src="./loader.html"></partial>
 
         <div class="table-users">
           <table id="table-users">
@@ -38,8 +40,8 @@
               <td class="py-3 pe-1 px-lg-3 text-center"><button>Details</button></td>
             </tr> -->
           </table>
-          
         </div>
+        
       </div>
     </div>
   </div>
