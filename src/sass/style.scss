@@ -1,5 +1,5 @@
 @import "node_modules/bootstrap/scss/bootstrap";
-*, p{
+*, p ,h1,h2,h3,h4,h5,h6{
   margin: 0;
 }
 
@@ -135,8 +135,8 @@ main div .users-container-main{
       }
     }
     .alphabet-pager{
-      flex-wrap: wrap;
-      margin: .7rem 0;
+      overflow-x: auto;
+      padding: .7rem 0;
       .btn-search{
         margin: .3rem .3rem;
         border: none;
@@ -153,41 +153,108 @@ main div .users-container-main{
   .table-users{
     height: 60vh;
     overflow-y: auto;
-    table{
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0px 10px;
 
-      .active-user{
-        td:last-child{
-          border-right: 1.1rem solid #5AE1F8 !important;
+    .table{
+      .table-head{
+        p{
+          width: 100%;
+          text-align: center;
+          font-weight: 700;
+          margin: .5rem 0;
         }
-      }
+        p:last-child{
+          width: 20rem;
+        }
 
-      tr{
-        td{
+      }
+      .table-body{
+        border-radius: 30px;
+        p{
+          width: 100%;
+          // text-align: center;
           margin: .5rem 0;
           background-color: #fff;
           border-right: 1px solid #dedede;
+          word-break: break-all;
+          display: flex;
+          align-items: center;
         }
-        td:first-child{
+        p:first-child{
           border-radius: 15px 0 0 15px;
         }
-        td:last-child{
+        p:last-child{
           border-radius: 0 15px 15px 0;
           border-right: 1.1rem solid #D8D8D8;
+          width: 16rem;
         }
-        td{
-          button{
-            border: none;
-            background-color: rgb(189, 0, 0);
-            color: #fff;
-            border-radius: 10px;
-            padding: .2rem .8rem;
+        button{
+          border: none;
+          background-color: rgb(189, 0, 0);
+          color: #fff;
+          border-radius: 10px;
+          padding: .2rem .75rem;
+        }
+        button:hover{
+          background-color: rgb(148, 0, 0);
+        }
+      }
+    }
+
+
+  }
+
+  .details-user{
+    .header-details{
+      h4{
+        display: flex;
+        align-items: center;
+      }
+      button{
+        background-color: #202c56;
+        color: #fff;
+        border: none;
+        padding: .8rem 1rem;
+        border-radius: 1rem;
+      }
+    }
+    .title-column{
+      background-color: #425AC1;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+
+      h5{
+        margin: 0;
+      }
+    }
+    .content{
+      // border: 1px solid grey;
+      border-radius: 1rem;
+      box-shadow: 5px 7px 8px 0px #d6d6d6;
+      padding: .5rem;
+      ul{
+        list-style: none;
+        padding: 0;
+        li{
+          margin: .5rem 0;
+          font-weight: 600;
+          span{
+            color: #425AC1;
+            font-weight: 400;
           }
-          button:hover{
-            background-color: rgb(148, 0, 0);
-          }
+        }
+      }
+    }
+    .role{
+      li{
+        border-bottom: 1px solid rgb(197, 197, 197);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        span i{
+          font-size: 1.1rem;
+          cursor: pointer;
         }
       }
     }

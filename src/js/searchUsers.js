@@ -39,16 +39,16 @@ async function search(letter){
 
 
 const showUsers = (data)=>{
-  // console.log(data);
   const table = document.getElementById('table-users')
   data.forEach(user => {
     const row = `
-    <tr class="">
-      <td class="py-3 pe-1 px-lg-3">${user.displayName}</td>
-      <td class="py-3 pe-1 px-lg-3">${user.mail}</td>
-      <td class="py-3 pe-1 px-lg-3 text-center"><button>Details</button></td>
-    </tr>
-    `
+    <div class="table-body d-flex justify-content-between">
+      <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
+      <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
+      <p class="py-3 pe-1 px-lg-3 justify-content-center">
+        <button data-id="${user.id}">Details</button>
+      </p>
+    </div>`
     table.innerHTML += row
   });
 

@@ -11,37 +11,70 @@
       <div class="container-fluid position-relative users-container-main">
         
         <div class="search-container">
-          <!-- <form id="formSearch"> -->
             <label for="searchUser">Search by Name or Username</label>
             <div class="inputSearch d-flex align-items-center justify-content-between">
               <p>Users</p>
               <input type="text" name="searchUser" id="searchUser" placeholder=" Search...">
               <button>Go!</button>
             </div>
-          <!-- </form> -->
-
-          <div id="alphabet-pager" class="alphabet-pager d-flex justify-content-center">
+          <div id="alphabet-pager" class="alphabet-pager d-flex justify-content-start justify-content-xl-center ">
           </div>
         </div>
 
         <partial src="./loader.html"></partial>
 
-        <div class="table-users">
-          <table id="table-users">
-            <tr class="text-center">
-              <th>Name</th>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-
-            <!-- <tr class="active-user">
-              <td class="py-3 pe-1 px-lg-3">OmarLamprea</td>
-              <td class="py-3 pe-1 px-lg-3">lampreaomar@gmail.com</td>
-              <td class="py-3 pe-1 px-lg-3 text-center"><button>Details</button></td>
-            </tr> -->
-          </table>
+        <div id="table-container" class="table-users">
+          <div id="table-users" class="table">
+            <div class="table-head d-flex justify-content-between">
+              <p>Name</p>
+              <p>Email</p>
+              <p>Action</p>
+            </div>
+            <!-- table body -->
+          </div>
         </div>
-        
+        <div id="details-user" class="details-user mt-3 d-none">
+          <div class="header-details d-flex justify-content-between mb-3">
+            <h4 class="">User details</h4>
+            <button id="close-user-details">Go back</button>
+          </div>
+          <div class="details-container">
+            <div class="row">
+              <div class="col-12 col-md-6 px-1">
+                <div class="title-column">
+                  <h5>Information</h5>
+                </div>
+                <div class="content mt-3">
+                  <ul id="ul-user-details">
+                    <!-- li userDetails -->
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-3 mt-3 mt-md-0 px-1">
+                <div class="title-column">
+                  <h5>Active Roles +</h5>
+                </div>
+                <div class="content role mt-3">
+                  <ul id="ul-active-roles">
+                    <!-- li active role -->
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-3 my-3 my-md-0 px-1">
+                <div class="title-column">
+                  <h5>Aviable Roles -</h5>
+                </div>
+                <div class="content role mt-3">
+                  <ul id="ul-aviable-roles">
+                    <!-- li aviable role -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
