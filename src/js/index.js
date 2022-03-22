@@ -1,7 +1,7 @@
 //production:
-const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
+// const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
 //Test:
-// const urlApi = 'https://acsadmin.azurewebsites.net/api/TestUser'
+const urlApi = 'https://acsadmin.azurewebsites.net/api/TestUser'
 
 
 

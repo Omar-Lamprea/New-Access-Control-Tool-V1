@@ -236,11 +236,12 @@ main div .users-container-main{
         list-style: none;
         padding: 0;
         li{
-          margin: .5rem 0;
+          margin: 1rem 0;
           font-weight: 600;
           span{
             color: #425AC1;
             font-weight: 400;
+            word-break: break-word;
           }
         }
       }

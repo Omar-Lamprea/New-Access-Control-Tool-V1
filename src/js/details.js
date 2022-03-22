@@ -1,6 +1,9 @@
+let userId;
 document.addEventListener('click', e =>{
   if(e.target.dataset.id) openDetails(e.target.dataset.id);
   if(e.target.id === 'close-user-details') closeUserDetails()
+  if(e.target.dataset.activerole) desactivateRole(e.target.dataset.activerole, userId)
+  if(e.target.dataset.aviablerole) activateRole(e.target.dataset.aviablerole, userId)
 })
 
 
@@ -18,18 +21,19 @@ async function openDetails(id){
     const ulList = document.getElementById('ul-user-details')
     const contentDetails = content.data.userGraph
     const roles = content.data.query
-
+    userId = contentDetails.id
     
-
-    for (const key in contentDetails) {
-        const element = contentDetails[key];
-        if (element !== null && element.length > 0) {
-          const li = `
-            <li>
-              ${key.toUpperCase()}: <span>${element}</span>
-            </li>`
-          ulList.innerHTML += li
-        }
+    if (ulList.childElementCount < 1) {
+      for (const key in contentDetails) {
+          const element = contentDetails[key];
+          if (element !== null && element.length > 0) {
+            const li = `
+              <li>
+                ${key.toUpperCase()}: <span>${element}</span>
+              </li>`
+            ulList.innerHTML += li
+          }
+      }
     }
 
     showRoles(roles)
@@ -48,9 +52,6 @@ function showRoles(roles){
       role.isActive ? activeRoles.push(role) : aviableRoles.push(role)
     });
 
-    console.log(activeRoles);
-    console.log(aviableRoles);
-
     if (activeRoles.length > 0) {
       activeRoles.forEach(active => {
         const li = `
@@ -59,48 +60,98 @@ function showRoles(roles){
             ${active.roleName}
           </p>
           <span>
-            <i class="fa-solid fa-minus"></i>
+            <i class="fa-solid fa-minus" data-activerole="${active.roleId}"></i>
           </span>
         </li>`
         ulActiveRoles.innerHTML += li
       });
     }else{
-      ulActiveRoles.innerHTML = `<li>no hay roles activos</li>`
+      ulActiveRoles.innerHTML = `<li>no active roles</li>`
     }
 
     if (aviableRoles.length > 0) {
       aviableRoles.forEach(aviable => {
+        // console.log(aviable);
         const li = `
         <li>
           <p>
             ${aviable.roleName}
           </p>
           <span>
-            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus" data-aviablerole="${aviable.roleId}"></i>
           </span>
         </li>`
         ulAviableRoles.innerHTML += li
       });
     }else{
-      ulAviableRoles.innerHTML = `<li>no hay roles disponibles</li>`
+      ulAviableRoles.innerHTML = `<li>no roles available</li>`
     }
+}
+
+
+
+
+
+//update Roles
+async function desactivateRole(roleId, userId){
+  // console.log('des', roleId, 'userId:', userId);
+  const desactivate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify({
+      "roleId": roleId,
+      "action": "delete"
+    })
+  })
+  if (desactivate.ok) {
+    const content = await desactivate.json()
+    clearRoles()
+    openDetails(userId)
+  }
+}
+
+async function activateRole(roleId, userId){
+  // console.log('act', roleId, 'userId:',userId);
+  const activate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify({
+      "roleId": roleId,
+      "action": "insert"
+    })
+  })
+  if (activate.ok) {
+    const content = await activate.json()
+    clearRoles()
+    openDetails(userId)
+  }
 }
 
 function closeUserDetails(){
   const ulList = document.getElementById('ul-user-details')
-  const ulActiveRoles = document.getElementById('ul-active-roles')
-  const ulAviableRoles = document.getElementById('ul-aviable-roles')
 
   while(ulList.firstChild){
     ulList.removeChild(ulList.firstChild)
   }
+
+  clearRoles()
+  tableContainer.classList.remove('d-none')
+  details.classList.add('d-none')
+}
+
+function clearRoles(){
+
+  const ulActiveRoles = document.getElementById('ul-active-roles')
+  const ulAviableRoles = document.getElementById('ul-aviable-roles')
+
   while(ulActiveRoles.firstChild){
     ulActiveRoles.removeChild(ulActiveRoles.firstChild)
   }
   while(ulAviableRoles.firstChild){
     ulAviableRoles.removeChild(ulAviableRoles.firstChild)
   }
-
-  tableContainer.classList.remove('d-none')
-  details.classList.add('d-none')
 }

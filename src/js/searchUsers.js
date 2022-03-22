@@ -1,5 +1,6 @@
 localStorage.setItem('search', 'A')
 async function search(letter){
+  closeUserDetails()
   const loader = document.getElementById('loader')
   const table = document.getElementById('table-users')
 
@@ -40,6 +41,8 @@ async function search(letter){
 
 const showUsers = (data)=>{
   const table = document.getElementById('table-users')
+
+
   data.forEach(user => {
     const row = `
     <div class="table-body d-flex justify-content-between">
