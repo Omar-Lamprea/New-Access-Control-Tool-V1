@@ -21,25 +21,41 @@
 
     <ul id="ulList">
       <li>
-        <a href="./users.html">
-          <i>
-            <img src="./img/adduser.png" alt="" width="30">
-          </i>
+        <div id="itemMenu" class="item">
+          <i><img data-userMenu="itemMenu" src="./img/adduser.png" alt="" width="30"></i>
           <span>
-            ADMIN USERS
-          </span> 
-        </a>
+            <p data-userMenu="itemMenu">ADMIN USERS</p>
+            <div class="subItems">
+              <ul>
+                <li id="subItemUser">
+                  <a href="./users.html">Users</a>
+                </li>
+                <li id="subItemRoles">
+                  <a href="./roles.html">Roles</a>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </div>
       </li>
   
       <li>
-        <a href="./messages.html">
-          <i>
-            <img src="./img/message.png" alt="" width="30">
-          </i>
+        <div class="item">
+          <i><img src="./img/message.png" alt="" width="30"></i>
           <span>
-            MESSAGES
+            <p>Itinerary</p>
+            <div class="subItems">
+              <ul>
+                <li class="">
+                  <a href="#">Item</a>
+                </li>
+                <li>
+                  <a href="#">Item</a>
+                </li>
+              </ul>
+            </div>
           </span>
-        </a>
+        </div>
       </li>
     </ul>
   </nav>

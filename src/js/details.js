@@ -9,11 +9,15 @@ document.addEventListener('click', e =>{
 
 const tableContainer = document.getElementById('table-container')
 const details = document.getElementById('details-user')
+const loader = document.getElementById('loader')
 
 async function openDetails(id){
+  loader.classList.remove('d-none')
+  
   const getUser = await fetch(`${urlApi}/${id}`)
   if (getUser.ok) {
     tableContainer.classList.add('d-none')
+    loader.classList.add('d-none')
     details.classList.remove('d-none')
 
     const content = await getUser.json()

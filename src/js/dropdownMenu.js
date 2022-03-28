@@ -2,6 +2,7 @@ const btnDropDown = document.getElementById('btnDropDown')
 const sidebarMenu = document.getElementById('sidebarMenu')
 const content = document.getElementById('content')
 const ulList = document.getElementById('ulList')
+const itemMenu = document.getElementById('itemMenu')
 
 let contentMaxWidth = '93%'
 let contentMinWidth = '75%'
@@ -12,7 +13,6 @@ let transition = 'all ease .5s'
 const dropdownMenu = () =>{
   btnDropDown.classList.remove('d-none')
 
-  
   if(localStorage.getItem('start-menu') === 'closed'){
     btnDropDown.classList.add('btnDropDown-closed')
     sidebarMenu.style.width = sidebarMenuMinWidth
@@ -50,6 +50,24 @@ const dropdownMenu = () =>{
       ulList.classList.remove('ulList-closed')
     }
   })
+
+
+  document.addEventListener('click', (e)=>{
+    // console.log(e.target.dataset.usermenu);
+    if (e.target.dataset.usermenu) {
+      itemMenu.classList.toggle('item-active')
+    }
+  })
+  if (window.location.href.includes('users')) {
+    const subItemUser = document.getElementById('subItemUser')
+    subItemUser.classList.add('liActiveMenu')
+    itemMenu.classList.add('item-active')
+  }
+  if (window.location.href.includes('roles')) {
+    const subItemRoles = document.getElementById('subItemRoles')
+    subItemRoles.classList.add('liActiveMenu')
+    itemMenu.classList.add('item-active')
+  }
 }
 
 const restoreMenu = () =>{

@@ -42,18 +42,22 @@ async function search(letter){
 const showUsers = (data)=>{
   const table = document.getElementById('table-users')
 
-
-  data.forEach(user => {
-    const row = `
-    <div class="table-body d-flex justify-content-between">
-      <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
-      <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
-      <p class="py-3 pe-1 px-lg-3 justify-content-center">
-        <button data-id="${user.id}">Details</button>
-      </p>
-    </div>`
-    table.innerHTML += row
-  });
-
-  localStorage.setItem('count', table.children.length)
+  if (data.length > 0) {
+    data.forEach(user => {
+      const row = `
+      <div class="table-body d-flex justify-content-between">
+        <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
+        <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
+        <p class="py-3 pe-1 px-lg-3 justify-content-center">
+          <button data-id="${user.id}">Details</button>
+        </p>
+      </div>`
+      table.innerHTML += row
+    });
+  
+    localStorage.setItem('count', table.children.length)
+  }else{
+    table.innerHTML += `
+      <div class='text-center mt-5'><h5>We didn't find any results</h5></div>`
+  }
 }

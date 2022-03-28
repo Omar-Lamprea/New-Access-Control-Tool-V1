@@ -18,11 +18,15 @@ document.addEventListener('click', e =>{
 
 const tableContainer = document.getElementById('table-container')
 const details = document.getElementById('details-user')
+const loader = document.getElementById('loader')
 
 async function openDetails(id){
+  loader.classList.remove('d-none')
+  
   const getUser = await fetch(`${urlApi}/${id}`)
   if (getUser.ok) {
     tableContainer.classList.add('d-none')
+    loader.classList.add('d-none')
     details.classList.remove('d-none')
 
     const content = await getUser.json()
@@ -168,6 +172,7 @@ const btnDropDown = document.getElementById('btnDropDown')
 const sidebarMenu = document.getElementById('sidebarMenu')
 const content = document.getElementById('content')
 const ulList = document.getElementById('ulList')
+const itemMenu = document.getElementById('itemMenu')
 
 let contentMaxWidth = '93%'
 let contentMinWidth = '75%'
@@ -178,7 +183,6 @@ let transition = 'all ease .5s'
 const dropdownMenu = () =>{
   btnDropDown.classList.remove('d-none')
 
-  
   if(localStorage.getItem('start-menu') === 'closed'){
     btnDropDown.classList.add('btnDropDown-closed')
     sidebarMenu.style.width = sidebarMenuMinWidth
@@ -216,6 +220,24 @@ const dropdownMenu = () =>{
       ulList.classList.remove('ulList-closed')
     }
   })
+
+
+  document.addEventListener('click', (e)=>{
+    // console.log(e.target.dataset.usermenu);
+    if (e.target.dataset.usermenu) {
+      itemMenu.classList.toggle('item-active')
+    }
+  })
+  if (window.location.href.includes('users')) {
+    const subItemUser = document.getElementById('subItemUser')
+    subItemUser.classList.add('liActiveMenu')
+    itemMenu.classList.add('item-active')
+  }
+  if (window.location.href.includes('roles')) {
+    const subItemRoles = document.getElementById('subItemRoles')
+    subItemRoles.classList.add('liActiveMenu')
+    itemMenu.classList.add('item-active')
+  }
 }
 
 const restoreMenu = () =>{
@@ -234,6 +256,7 @@ window.addEventListener('resize', e =>{
 // const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
 //Test:
 const urlApi = 'https://acsadmin.azurewebsites.net/api/TestUser'
+const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/TestRole'
 
 
 
@@ -242,6 +265,11 @@ if (window.location.href.includes('/users.html')) {
   searchInput()
   search('A')
 }
+
+if (window.location.href.includes('/roles.html')) {
+  searchRoles()
+}
+
 function pagination(){
   const alphabet =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
   const alphabetPager = document.getElementById('alphabet-pager')
@@ -254,6 +282,63 @@ function pagination(){
 }
 
 
+function roleDetails(){
+  document.addEventListener('click', e =>{
+    if(e.target.dataset.roleid) openRoleDetails(e.target.dataset.roleid);
+    if(e.target.id === 'close-role-details') closeRoleDetails()
+
+  })
+
+  const tableContainer = document.getElementById('table-container')
+  const details = document.getElementById('details-role')
+  const loader = document.getElementById('loader')
+
+  async function openRoleDetails(id){
+    loader.classList.remove('d-none')
+    const response = await fetch(`${urlRolesApi}/${id}`)
+    if (response.ok) {
+
+      tableContainer.classList.add('d-none')
+      details.classList.remove('d-none')
+      loader.classList.add('d-none')
+
+      const content = await response.json()
+      const ulList = document.getElementById('ul-role-details')
+      const ulInfoRole = document.getElementById('ul-info-roles')
+      
+      const liInfoRole = `
+        <li>Role name: <span> ${content.data.roleName}</span></li>
+        <li>Role id: <span> ${content.data.roleId}</span></li>`
+      ulInfoRole.innerHTML += liInfoRole
+
+      content.data.persmisions.forEach(details => {
+        const li = `
+          <li>name: <span>${details.name}</span></li>
+          <li>id: <span>${details.id}</span></li>
+          <li style="border-bottom: 1px solid grey">active: <span>${details.isActive}</span></li>
+          `
+        ulList.innerHTML += li
+      });
+    }
+  }
+
+  function closeRoleDetails(){
+    const ulList = document.getElementById('ul-role-details')
+    const ulInfoList = document.getElementById('ul-info-roles')
+
+    while(ulInfoList.firstChild){
+      ulInfoList.removeChild(ulInfoList.firstChild)
+    }
+
+    while(ulList.firstChild){
+      ulList.removeChild(ulList.firstChild)
+    }
+
+    tableContainer.classList.remove('d-none')
+    details.classList.add('d-none')
+  }
+}
+roleDetails()
 function searchInput(){
   const searchUser = document.getElementById('searchUser')
   let typingtimer = null;
@@ -276,6 +361,27 @@ function searchInput(){
       }, 1000);
     }
   })
+}
+async function searchRoles(){
+  const response = await fetch(`${urlRolesApi}`)
+  if (response.ok) {
+    const content = await response.json()
+    const loader = document.getElementById('loader')
+    const table = document.getElementById('table-roles')
+
+    loader.classList.add('d-none')
+    content.data.query.forEach(role => {
+      const row = `
+      <div class="table-body d-flex justify-content-between">
+        <p class="py-3 pe-1 px-lg-3">${role.roleName}</p>
+        <p class="py-3 pe-1 px-lg-3">${role.roleId}</p>
+        <p class="py-3 pe-1 px-lg-3 justify-content-center">
+          <button data-roleid="${role.roleId}">Details</button>
+        </p>
+      </div>`
+      table.innerHTML += row
+    });
+  }
 }
 localStorage.setItem('search', 'A')
 async function search(letter){
@@ -321,18 +427,22 @@ async function search(letter){
 const showUsers = (data)=>{
   const table = document.getElementById('table-users')
 
-
-  data.forEach(user => {
-    const row = `
-    <div class="table-body d-flex justify-content-between">
-      <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
-      <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
-      <p class="py-3 pe-1 px-lg-3 justify-content-center">
-        <button data-id="${user.id}">Details</button>
-      </p>
-    </div>`
-    table.innerHTML += row
-  });
-
-  localStorage.setItem('count', table.children.length)
+  if (data.length > 0) {
+    data.forEach(user => {
+      const row = `
+      <div class="table-body d-flex justify-content-between">
+        <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
+        <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
+        <p class="py-3 pe-1 px-lg-3 justify-content-center">
+          <button data-id="${user.id}">Details</button>
+        </p>
+      </div>`
+      table.innerHTML += row
+    });
+  
+    localStorage.setItem('count', table.children.length)
+  }else{
+    table.innerHTML += `
+      <div class='text-center mt-5'><h5>We didn't find any results</h5></div>`
+  }
 }
