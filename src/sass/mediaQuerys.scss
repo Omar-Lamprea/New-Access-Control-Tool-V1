@@ -1,0 +1,21 @@
+@media screen and (max-width: '991px') {
+  main{
+    .row{
+      height: 0;
+    }
+  }
+  header{
+    display: block;
+    padding: 1rem 0 !important;
+    h1{
+      font-size: 1.5rem;
+    }
+    button{
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  .users-container-main{
+    padding: 1rem 0 !important;
+  }
+}

@@ -1,0 +1,175 @@
+.sidebarMenu nav {
+  background-color: #202c56;
+  border-radius: 30px 30px 0 0;
+  height: 100%;
+  max-width: 250px;
+}
+
+.sidebarMenu nav .logo {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.sidebarMenu nav .logo img {
+  max-width: 200px;
+  width: 100%;
+}
+
+.sidebarMenu nav .apps {
+  color: #fefefe;
+  font-size: 2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.sidebarMenu nav .apps i:after {
+  content: inherit;
+}
+
+.sidebarMenu nav .apps ul li:hover {
+  background-color: inherit;
+}
+
+.sidebarMenu nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebarMenu nav a:hover {
+  color: #fff;
+}
+
+.sidebarMenu nav ul {
+  padding-left: 0;
+}
+
+.sidebarMenu nav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #fff;
+  list-style: none;
+  padding: .5rem 2rem;
+  border-radius: 50px 0 0 50px;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sidebarMenu nav ul li .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 2rem;
+  overflow: hidden;
+}
+
+.sidebarMenu nav ul li .item i {
+  margin-right: 1rem;
+}
+
+.sidebarMenu nav ul li .item span {
+  width: 100%;
+}
+
+.sidebarMenu nav ul li .item span p {
+  cursor: pointer;
+}
+
+.sidebarMenu nav ul li .item span .subItems ul {
+  padding: 0;
+}
+
+.sidebarMenu nav ul li .item span .subItems ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  padding-left: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #fff;
+}
+
+.sidebarMenu nav ul li .item span .subItems ul li a {
+  margin-left: .5rem;
+}
+
+.sidebarMenu nav ul li .item span .subItems ul .liActiveMenu a {
+  color: #5AE1F8;
+}
+
+.sidebarMenu nav ul li .item-active {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.sidebarMenu nav .ulList-closed {
+  padding: 0;
+  -webkit-transition: all ease .5s;
+  transition: all ease .5s;
+}
+
+.sidebarMenu nav .ulList-closed li {
+  padding-left: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.sidebarMenu nav .ulList-closed li a i {
+  margin-right: 0;
+}
+
+.sidebarMenu nav .ulList-closed li a span {
+  opacity: 0%;
+  display: none;
+}
+
+.sidebarMenu .btnDropDown {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 1rem 1rem 0 0;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sidebarMenu .btnDropDown-open {
+  -webkit-transition: all ease .5s;
+  transition: all ease .5s;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.sidebarMenu .btnDropDown-closed {
+  -webkit-transition: all ease .5s;
+  transition: all ease .5s;
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+@media screen and (max-width: 991px) {
+  .sidebarMenu nav {
+    max-width: inherit;
+    height: inherit;
+  }
+}
+/*# sourceMappingURL=sidebarMenu.css.map */

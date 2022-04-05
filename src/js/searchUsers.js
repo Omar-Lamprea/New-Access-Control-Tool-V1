@@ -46,9 +46,9 @@ const showUsers = (data)=>{
     data.forEach(user => {
       const row = `
       <div class="table-body d-flex justify-content-between">
-        <p class="py-3 pe-1 px-lg-3">${user.displayName}</p>
-        <p class="py-3 pe-1 px-lg-3">${user.mail}</p>
-        <p class="py-3 pe-1 px-lg-3 justify-content-center">
+        <p class="py-1 pe-1 px-lg-3">${user.displayName}</p>
+        <p class="py-1 pe-1 px-lg-3">${user.mail}</p>
+        <p class="py-1 pe-1 px-lg-3 justify-content-center">
           <button data-id="${user.id}">Details</button>
         </p>
       </div>`

@@ -7,8 +7,8 @@ const menu = ()=>{
   const itemMenu = document.getElementById('itemMenu')
   
   let contentMaxWidth = '93%'
-  let contentMinWidth = '75%'
-  let sidebarMenuMaxWidth = '25%'
+  let contentMinWidth = '80%'
+  let sidebarMenuMaxWidth = '20%'
   let sidebarMenuMinWidth = '7%'
   let transition = 'all ease .5s'
 

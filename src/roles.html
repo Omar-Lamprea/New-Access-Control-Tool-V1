@@ -23,7 +23,7 @@
 
         <partial src="./loader.html"></partial>
 
-        <div id="table-container" class="table-users">
+        <div id="table-container" class="results-table roles-table">
           <div id="table-roles" class="table">
             <div class="table-head d-flex justify-content-between">
               <p>Role name</p>
@@ -33,14 +33,14 @@
             <!-- table body -->
           </div>
         </div>
-        <div id="details-role" class="details-user mt-3 d-none">
+        <div id="details-role" class="details-list mt-3 d-none">
           <div class="header-details d-flex justify-content-between mb-3">
             <h4 class="">Role details</h4>
             <button id="close-role-details">Go back</button>
           </div>
           <div class="details-container">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 px-1">
                 <div class="title-column">
                   <h5>Information</h5>
                 </div>
@@ -51,16 +51,39 @@
                 </div>
               </div>
 
-              <div class="col-12">
+              <div class="col-12 col-sm-6 mt-3 mt-md-0 px-1">
+                <div class="title-column">
+                  <h5>Active Permissions +</h5>
+                </div>
+                <div class="content role mt-3">
+                  <ul id="ul-active-permissions">
+                    <!-- li active role -->
+                  </ul>
+                </div>
+              </div>
+
+
+              <div class="col-12 col-sm-6 my-3 my-md-0 px-1">
+                <div class="title-column">
+                  <h5>Aviable Permissions -</h5>
+                </div>
+                <div class="content role mt-3">
+                  <ul id="ul-aviable-permissions">
+                    <!-- li aviable role -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- <div class="col-12">
                 <div class="title-column">
                   <h5>Permissions</h5>
                 </div>
                 <div class="content mt-3">
                   <ul id="ul-role-details">
-                    <!-- li userDetails -->
+                    li userDetails
                   </ul>
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div class="col-12 col-sm-6 col-md-3 mt-3 mt-md-0 px-1">
                 <div class="title-column">

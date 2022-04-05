@@ -9,9 +9,9 @@ async function searchRoles(){
     content.data.query.forEach(role => {
       const row = `
       <div class="table-body d-flex justify-content-between">
-        <p class="py-3 pe-1 px-lg-3">${role.roleName}</p>
-        <p class="py-3 pe-1 px-lg-3">${role.roleId}</p>
-        <p class="py-3 pe-1 px-lg-3 justify-content-center">
+        <p class="py-1 pe-1 px-lg-3">${role.roleName}</p>
+        <p class="py-1 pe-1 px-lg-3">${role.roleId}</p>
+        <p class="py-1 pe-1 px-lg-3 justify-content-center">
           <button data-roleid="${role.roleId}">Details</button>
         </p>
       </div>`

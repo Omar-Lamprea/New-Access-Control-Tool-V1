@@ -1,0 +1,53 @@
+.results-table{
+  height: 60vh;
+  overflow-y: auto;
+
+  .table{
+    .table-head{
+      p{
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+        margin: .5rem 0;
+      }
+      p:last-child{
+        width: 20rem;
+      }
+
+    }
+    .table-body{
+      border-radius: 30px;
+      p{
+        width: 100%;
+        margin: .1rem 0;
+        background-color: #fff;
+        border-right: 1px solid #dedede;
+        word-break: break-all;
+        display: flex;
+        align-items: center;
+      }
+      p:first-child{
+        border-radius: 15px 0 0 15px;
+      }
+      p:last-child{
+        border-radius: 0 15px 15px 0;
+        border-right: 1.1rem solid #D8D8D8;
+        width: 16rem;
+      }
+      button{
+        border: none;
+        background-color: rgb(189, 0, 0);
+        color: #fff;
+        border-radius: 10px;
+        padding: .2rem .75rem;
+      }
+      button:hover{
+        background-color: rgb(148, 0, 0);
+      }
+    }
+  }
+}
+
+.roles-table{
+  height: 80vh;
+}

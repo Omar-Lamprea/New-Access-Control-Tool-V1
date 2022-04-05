@@ -59,7 +59,7 @@ function showRoles(roles){
     if (activeRoles.length > 0) {
       activeRoles.forEach(active => {
         const li = `
-        <li>
+        <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
           <p>
             ${active.roleName}
           </p>
@@ -77,7 +77,7 @@ function showRoles(roles){
       aviableRoles.forEach(aviable => {
         // console.log(aviable);
         const li = `
-        <li>
+        <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
           <p>
             ${aviable.roleName}
           </p>
