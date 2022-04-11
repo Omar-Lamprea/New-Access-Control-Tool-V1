@@ -98,12 +98,48 @@
                 </div>
                 <div id="content" class="col-12 col-lg-9">
                     <header class="container">
-                         <h1>Access Control tool V1</h1>
+                         <h1>Access Control tool V1 role</h1>
 
                         <button>Log out</button>
                     </header>
-                    <div class="container-fluid">
-                        <p class="">Messages</p>
+                    <div class="container-fluid position-relative users-container-main">
+                        <!-- <div id="loader" class="lds-roller position-absolute" style="right:
+                        calc(50% + 40px); top: 50%;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div> -->
+                        <div class="from-permission">
+                             <h4 class="text-center">Add new permission</h4>
+
+                            <div class="form-action-permission">
+                                <div class="form-permissions-container">
+                                    <label for="permissionName">Permission name:</label>
+                                    <input type="text" name="permissionName" id="permissionName">
+                                    <button id="btnAddPermission">Create</button>
+                                    <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="from-permission mt-3">
+                             <h4 class="text-center">Set permission name</h4>
+
+                            <div class="form-action-permission">
+                                <div class="form-permissions-container">
+                                    <label for="permissionId">Permission id:</label>
+                                    <input type="text" name="permissionId" id="permissionId">
+                                    <label for="setPermissionName">new name:</label>
+                                    <input type="text" name="setPermissionName" id="setPermissionName">
+                                    <button id="btnSetPermission">Set Permission</button>
+                                    <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

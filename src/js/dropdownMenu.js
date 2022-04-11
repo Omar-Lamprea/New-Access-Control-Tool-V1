@@ -29,6 +29,11 @@ const menu = ()=>{
     subItemRoles.classList.add('liActiveMenu')
     itemMenu.classList.add('item-active')
   }
+  if (window.location.href.includes('newPermission')) {
+    const subItemNewPermission = document.getElementById('subItemNewPermission')
+    subItemNewPermission.classList.add('liActiveMenu')
+    itemMenu.classList.add('item-active')
+  }
 
   
   const dropdownMenu = () =>{
@@ -83,22 +88,11 @@ const menu = ()=>{
     ulList.classList.remove('ulList-closed')
   }
   
-  // window.innerWidth > 992 
-  //   ? dropdownMenu() 
-  //   : btnDropDown.classList.add('d-none')
-  
-  // window.addEventListener('resize', e =>{
-  //   e.target.innerWidth > 992 
-  //     ? dropdownMenu() 
-  //     : restoreMenu()
-  // })
-
   let breakPoint = window.matchMedia('(min-width: 992px)')
   const responsive = (e) =>{
     if(e.matches){
       dropdownMenu()
     }else{
-      // btnDropDown.classList.add('d-none')
       restoreMenu()
     }
   }
