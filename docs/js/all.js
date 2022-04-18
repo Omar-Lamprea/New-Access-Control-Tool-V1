@@ -704,7 +704,7 @@ function adminRoles(){
       }
     }else{
       textAddResponse.style.color = 'red'
-      textAddResponse.innerText = 'Complete the role name field'
+      textAddResponse.innerText = 'Complete the role name field.'
       roleName.focus()
     }
   })
@@ -747,15 +747,16 @@ function adminRoles(){
     }else{
       textSetResponse.style.color = 'red'
       if (!roleId.value && setRoleName.value) {
-        textSetResponse.innerText = 'Complete the Role id field'
+        textSetResponse.innerText = 'Complete the Role id field.'
         roleId.focus()
       }else if(roleId.value && !setRoleName.value){
-        textSetResponse.innerText = 'Complete the Role name field'
+        textSetResponse.innerText = 'Complete the Role name field.'
         setRoleName.focus()
       }else{
-        textSetResponse.innerText = 'Complete the Role id field'
+        textSetResponse.innerText = 'Complete the Role id field.'
         roleId.focus()
       }
     }
   })
 }
+
