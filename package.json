@@ -32,6 +32,7 @@
     "gulp-uglify": "^3.0.2"
   },
   "dependencies": {
+    "npm": "^7.20.3",
     "sass": "^1.49.9"
   }
 }
