@@ -273,6 +273,7 @@ const menu = ()=>{
 menu()
 //production:
 // const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
+
 //Test:
 const urlApi = 'https://acsadmin.azurewebsites.net/api/test/user'
 const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/test/role'
@@ -287,6 +288,7 @@ if (window.location.href.includes('/users.html')) {
 }
 if (window.location.href.includes('/roles.html')) {
   searchRoles()
+  adminRoles()
 }
 if (window.location.href.includes('/newPermission.html')) {
   addPermission()
@@ -398,9 +400,10 @@ function roleDetails(){
 
   })
 
-  const tableContainer = document.getElementById('table-container')
-  const details = document.getElementById('details-role')
-  const loader = document.getElementById('loader')
+  let tableContainer = document.getElementById('table-container')
+  let details = document.getElementById('details-role')
+  let loader = document.getElementById('loader')
+  let adminRole = document.getElementById('addRole')
 
   async function openRoleDetails(id){
     loader.classList.remove('d-none')
@@ -410,6 +413,10 @@ function roleDetails(){
       tableContainer.classList.add('d-none')
       details.classList.remove('d-none')
       loader.classList.add('d-none')
+
+      adminRole.classList.remove('d-lg-flex')
+      adminRole.classList.add('d-none')
+
 
       let content = await response.json()
       roleId = content.data.roleId
@@ -522,6 +529,9 @@ function roleDetails(){
     clearPermissions()
     tableContainer.classList.remove('d-none')
     details.classList.add('d-none')
+
+    adminRole.classList.add('d-lg-flex')
+    adminRole.classList.remove('d-none')
   }
   function clearPermissions(){
     let ulInfoList = document.getElementById('ul-info-roles')
@@ -648,4 +658,104 @@ const showUsers = (data)=>{
     table.innerHTML += `
       <div class='text-center mt-5'><h5>We didn't find any results</h5></div>`
   }
+}
+function adminRoles(){
+  let btnAddRole = document.getElementById('btnAddRole')
+  let btnSetRole = document.getElementById('btnSetRole')
+
+  let roleName = document.getElementById('roleName')
+  let roleId = document.getElementById('roleId')
+  let setRoleName = document.getElementById('setRoleName')
+
+  // roleName.addEventListener('keyup',e =>{
+  //   e.target.value === '' 
+  //     ? btnAddRole.setAttribute('disabled', '')
+  //     : btnAddRole.removeAttribute('disabled', '')
+  // })
+
+  btnAddRole.addEventListener('click', async e =>{
+    let textAddResponse = document.getElementById('textAddResponse')
+    if (roleName.value) {
+      let loader = document.getElementById('loader-newRole')
+      loader.classList.remove('d-none')
+
+      let response = await fetch(`${urlRolesApi}/CreateRole`,{
+        method : "POST",
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          "name": roleName.value,
+          "status" : true
+        })
+      })
+      if (response.ok) {
+        loader.classList.add('d-none')
+        textAddResponse.style.color = '#425AC1'
+        textAddResponse.innerText = 'Created role!'
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+      }else{
+        console.error(response.status);
+        textAddResponse.style.color = 'red'
+        textAddResponse.innerText = 'Ops creation failed, please try again.'
+      }
+    }else{
+      textAddResponse.style.color = 'red'
+      textAddResponse.innerText = 'Complete the role name field'
+      roleName.focus()
+    }
+  })
+
+
+
+  btnSetRole.addEventListener('click', async e =>{
+    let textSetResponse = document.getElementById('textSetResponse')
+    if (roleId.value && setRoleName.value) {
+      console.log(roleId.value);
+      console.log(setRoleName.value);
+
+      let loader = document.getElementById('loader-setRole')
+      loader.classList.remove('d-none')
+
+      let response = await fetch(`${urlRolesApi}/UpdateRole/${roleId.value}`,{
+        method : "PUT",
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          "name": setRoleName.value,
+          "status": true
+        })
+      })
+      if (response.ok) {
+        loader.classList.add('d-none')
+        textSetResponse.style.color = '#425AC1'
+        textSetResponse.innerText = 'Updated Role!'
+
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
+
+      }else{
+        console.error(response.status);
+        textSetResponse.style.color = 'red'
+        textSetResponse.innerText = 'Ops update failed, please try again.'
+      }
+    }else{
+      textSetResponse.style.color = 'red'
+      if (!roleId.value && setRoleName.value) {
+        textSetResponse.innerText = 'Complete the Role id field'
+        roleId.focus()
+      }else if(roleId.value && !setRoleName.value){
+        textSetResponse.innerText = 'Complete the Role name field'
+        setRoleName.focus()
+      }else{
+        textSetResponse.innerText = 'Complete the Role id field'
+        roleId.focus()
+      }
+    }
+  })
 }

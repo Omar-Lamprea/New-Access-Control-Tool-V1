@@ -45,9 +45,19 @@
         background-color: rgb(148, 0, 0);
       }
     }
+    .table-body:hover{
+      background-color: #dedede;
+    }
   }
 }
 
+.title-roles{
+  background-color: #4259c0;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 5px 5px 0 0;
+}
 .roles-table{
-  height: 80vh;
+  // height: 80vh;
+  margin-bottom: 2rem;
 }

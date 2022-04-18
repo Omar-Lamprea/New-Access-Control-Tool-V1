@@ -9,9 +9,10 @@ function roleDetails(){
 
   })
 
-  const tableContainer = document.getElementById('table-container')
-  const details = document.getElementById('details-role')
-  const loader = document.getElementById('loader')
+  let tableContainer = document.getElementById('table-container')
+  let details = document.getElementById('details-role')
+  let loader = document.getElementById('loader')
+  let adminRole = document.getElementById('addRole')
 
   async function openRoleDetails(id){
     loader.classList.remove('d-none')
@@ -21,6 +22,10 @@ function roleDetails(){
       tableContainer.classList.add('d-none')
       details.classList.remove('d-none')
       loader.classList.add('d-none')
+
+      adminRole.classList.remove('d-lg-flex')
+      adminRole.classList.add('d-none')
+
 
       let content = await response.json()
       roleId = content.data.roleId
@@ -133,6 +138,9 @@ function roleDetails(){
     clearPermissions()
     tableContainer.classList.remove('d-none')
     details.classList.add('d-none')
+
+    adminRole.classList.add('d-lg-flex')
+    adminRole.classList.remove('d-none')
   }
   function clearPermissions(){
     let ulInfoList = document.getElementById('ul-info-roles')

@@ -40,7 +40,7 @@ function css() {
 }
 
 function js() {
-    return gulp.src('src/js/*.js')
+    return gulp.src('src/js/**')
         .pipe(jsImport({
             hideConsole: true
         }))
