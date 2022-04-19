@@ -99,81 +99,45 @@
                 </div>
                 <div id="content" class="col-12 col-lg-9">
                     <header class="container">
-                         <h1>Access Control tool V1</h1>
+                         <h1>Access Control tool V1 role</h1>
 
                         <button>Log out</button>
                     </header>
                     <div class="container-fluid position-relative users-container-main">
-                        <div class="search-container">
-                            <label for="searchUser">Search by Name or Username</label>
-                            <div class="inputSearch d-flex align-items-center justify-content-between">
-                                <p>Users</p>
-                                <input type="text" name="searchUser" id="searchUser" placeholder=" Search...">
-                                <button>Go!</button>
-                            </div>
-                            <div id="alphabet-pager" class="alphabet-pager d-flex justify-content-start justify-content-xl-center "></div>
-                        </div>
-                        <div id="loader" class="lds-roller position-absolute" style="right: calc(50% + 40px); top: 50%;">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <div id="table-container" class="results-table">
-                            <div id="table-users" class="table">
-                                <div class="table-head d-flex justify-content-between">
-                                    <p>Name</p>
-                                    <p>Email</p>
-                                    <p>Action</p>
+                        <!-- <div id="loader" class="lds-roller position-absolute" style="right:
+                        calc(50% + 40px); top: 50%;">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div> -->
+                        <div class="from-permission">
+                             <h4 class="text-center">Add new permission</h4>
+
+                            <div class="form-action-permission">
+                                <div class="form-permissions-container">
+                                    <label for="permissionName">Permission name:</label>
+                                    <input type="text" name="permissionName" id="permissionName">
+                                    <button id="btnAddPermission">Create</button>
+                                    <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
                                 </div>
-                                <!-- table body -->
                             </div>
                         </div>
-                        <div id="details-user" class="details-list mt-3 d-none">
-                            <div class="header-details d-flex justify-content-between mb-3">
-                                 <h4 class="">User details</h4>
+                        <div class="from-permission mt-3">
+                             <h4 class="text-center">Set permission name</h4>
 
-                                <button id="close-user-details">Go back</button>
-                            </div>
-                            <div class="details-container">
-                                <div class="row">
-                                    <div class="col-12 col-md-6 px-1">
-                                        <div class="title-column">
-                                             <h5>Information</h5>
-
-                                        </div>
-                                        <div class="content mt-3">
-                                            <ul id="ul-user-details">
-                                                <!-- li userDetails -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-3 mt-3 mt-md-0 px-1">
-                                        <div class="title-column">
-                                             <h5>Active Roles +</h5>
-
-                                        </div>
-                                        <div class="content role mt-3">
-                                            <ul id="ul-active-roles">
-                                                <!-- li active role -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-3 my-3 my-md-0 px-1">
-                                        <div class="title-column">
-                                             <h5>Aviable Roles -</h5>
-
-                                        </div>
-                                        <div class="content role mt-3">
-                                            <ul id="ul-aviable-roles">
-                                                <!-- li aviable role -->
-                                            </ul>
-                                        </div>
-                                    </div>
+                            <div class="form-action-permission">
+                                <div class="form-permissions-container">
+                                    <label for="permissionId">Permission id:</label>
+                                    <input type="text" name="permissionId" id="permissionId">
+                                    <label for="setPermissionName">new name:</label>
+                                    <input type="text" name="setPermissionName" id="setPermissionName">
+                                    <button id="btnSetPermission">Set Permission</button>
+                                    <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
                                 </div>
                             </div>
                         </div>

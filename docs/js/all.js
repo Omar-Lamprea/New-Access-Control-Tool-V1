@@ -290,7 +290,7 @@ if (window.location.href.includes('/roles')) {
   searchRoles()
   adminRoles()
 }
-if (window.location.href.includes('/newPermission')) {
+if (window.location.href.includes('/permissions')) {
   addPermission()
 }
 
