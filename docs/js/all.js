@@ -199,7 +199,7 @@ const menu = ()=>{
     subItemRoles.classList.add('liActiveMenu')
     itemMenu.classList.add('item-active')
   }
-  if (window.location.href.includes('newPermission')) {
+  if (window.location.href.includes('permissions.html')) {
     const subItemNewPermission = document.getElementById('subItemNewPermission')
     subItemNewPermission.classList.add('liActiveMenu')
     itemMenu.classList.add('item-active')
@@ -281,16 +281,16 @@ const urlPermission = 'https://acsadmin.azurewebsites.net/api/test/permission'
 
 
 
-if (window.location.href.includes('/users.html')) {
+if (window.location.href.includes('/users')) {
   pagination()
   searchInput()
   search('A')
 }
-if (window.location.href.includes('/roles.html')) {
+if (window.location.href.includes('/roles')) {
   searchRoles()
   adminRoles()
 }
-if (window.location.href.includes('/newPermission.html')) {
+if (window.location.href.includes('/permissions')) {
   addPermission()
 }
 
