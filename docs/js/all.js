@@ -199,7 +199,7 @@ const menu = ()=>{
     subItemRoles.classList.add('liActiveMenu')
     itemMenu.classList.add('item-active')
   }
-  if (window.location.href.includes('newPermission')) {
+  if (window.location.href.includes('permissions.html')) {
     const subItemNewPermission = document.getElementById('subItemNewPermission')
     subItemNewPermission.classList.add('liActiveMenu')
     itemMenu.classList.add('item-active')
