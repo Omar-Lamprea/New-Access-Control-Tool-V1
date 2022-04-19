@@ -1,5 +1,42 @@
 localStorage.setItem('search', 'A')
-async function search(letter){
+
+async function search(key) {
+
+  SetDisplayById('loader', 'block');
+
+  let getUsers;
+  let getUsersByStartLetter
+  key.value ? getUsers = key.value : key.id ? getUsers = key.id : getUsers = key
+
+  //Retrieve the Token
+  let token2 = await NetGetToken();
+
+  var url = new URL(USERAPI, AdminApiUrl)
+  var url2 = new URL(`${USERAPI}?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`, AdminApiUrl)
+
+  getUsers.length > 0 ?
+      getUsersByStartLetter = await (fetch(url2.href, { headers: { "Apikey": token2 } })): //`${urlApi}/?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`)):
+      getUsersByStartLetter = await (fetch(url.href, { headers: { "Apikey": token2 } }))
+  pagination(getUsers)
+
+  closeUserDetails()
+  let table = document.getElementById('table-users')
+
+  for (let i = localStorage.getItem('count'); i > 0; i--) {
+      if (table.children[i] !== undefined) {
+          table.removeChild(table.children[i])
+      }
+  }
+
+  SetDisplayById('loader', 'none');
+  if (!(getUsersByStartLetter == null) && getUsersByStartLetter.ok) {
+      let content = await getUsersByStartLetter.json()
+
+      showUsers(content.data)
+  }
+}
+
+async function search_old(letter){
   closeUserDetails()
   const loader = document.getElementById('loader')
   const table = document.getElementById('table-users')
