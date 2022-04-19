@@ -8,16 +8,16 @@ const urlPermission = 'https://acsadmin.azurewebsites.net/api/test/permission'
 
 
 
-if (window.location.href.includes('/users.html')) {
+if (window.location.href.includes('/users')) {
   pagination()
   searchInput()
   search('A')
 }
-if (window.location.href.includes('/roles.html')) {
+if (window.location.href.includes('/roles')) {
   searchRoles()
   adminRoles()
 }
-if (window.location.href.includes('/newPermission.html')) {
+if (window.location.href.includes('/newPermission')) {
   addPermission()
 }
 
