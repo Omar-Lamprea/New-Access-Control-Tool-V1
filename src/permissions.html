@@ -11,33 +11,31 @@
       <div class="container-fluid position-relative users-container-main">
         <!-- <partial src="./loader.html"></partial> -->
         
-        <div class="from-permission">
-          <h4 class="text-center">Add new permission</h4>
-          <div class="form-action-permission">
-            <div class="form-permissions-container">
-              <label for="permissionName">Permission name:</label>
-              <input type="text" name="permissionName" id="permissionName">
-              <button id="btnAddPermission">Create</button>
-              <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
-            </div>
+        <div class="form">
+          <h4>Add new permission</h4>
+          <div class="fieldbox">
+            <label for="permissionName">Permission name:</label>
+            <input type="text" name="permissionName" id="permissionName">
+            <button id="btnAddPermission">Create</button>
+            <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
           </div>
         </div>
 
         
-        <div class="from-permission mt-3">
-          <h4 class="text-center">Set permission name</h4>
-          <div class="form-action-permission">
-            <div class="form-permissions-container">
-              <label for="permissionId">Permission id:</label>
-              <input type="text" name="permissionId" id="permissionId">
-    
-              <label for="setPermissionName">new name:</label>
-              <input type="text" name="setPermissionName" id="setPermissionName">
-    
-              <button id="btnSetPermission">Set Permission</button>
-              <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
+        <div class="form mt-3">
+          <h4>Set permission name</h4>
 
-            </div>
+          <div class="fieldbox">
+            <label for="permissionId">Permission id:</label>
+            <input type="text" name="permissionId" id="permissionId">
+    
+            <label for="setPermissionName">new name:</label>
+            <input type="text" name="setPermissionName" id="setPermissionName">
+    
+            <button id="btnSetPermission">Set Permission</button>
+            <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
+
+
           </div>
         </div>
       </div>

@@ -12,102 +12,107 @@
 
         <partial src="./loader.html"></partial>
 
-        <h4 class="text-center title-roles mt-3">Roles</h4>
-        <div id="table-container" class="results-table roles-table">
+        <h4 class="text-center title-section mt-3">Roles</h4>
+
+
+
+
+        <div id="table-container" class="results-table">
           <div id="table-roles" class="table">
-            <div class="table-head d-flex justify-content-between">
-              <p>Role name</p>
-              <p>Role id</p>
-              <p>Action</p>
+              <div class="table-head d-flex justify-content-between">
+                  <p>Role name</p>
+                  <p>Role id</p>
+                  <p>Action</p>
+              </div>
+          </div>
+      </div>
+
+      <div id="addRole" class="d-md-flex">
+        <div class="col-md-6">
+          <div class="form">
+            <h4>Add new Role</h4>
+            <div class="fieldbox">
+              <label for="roleName">Role name:</label>
+              <input type="text" name="roleName" id="roleName">
+              <button id="btnAddRole">Create</button>
+
+              <div id="loader-newRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                <partial src="./loaderInLine.html"></partial>
+              </div>
+              <div id="textAddResponse" class="textResponseRole mt-3 text-center"></div>
             </div>
-            <!-- table body -->
           </div>
         </div>
-        <div id="details-role" class="details-list mt-3 d-none">
-          <div class="header-details d-flex justify-content-between mb-3">
-            <h4 class="">Role details</h4>
-            <button id="close-role-details">Go back</button>
+
+        <div class="col-md-6">
+          <div class="form">
+            <h4>Set role name</h4>
+            <div class="fieldbox">
+              <label for="roleId">Role id:</label>
+              <input type="text" name="roleId" id="roleId">
+    
+              <label for="setRoleName">New name:</label>
+              <input type="text" name="setRoleName" id="setRoleName">
+    
+              <button id="btnSetRole">Set Role</button>
+
+              <div id="loader-setRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                <partial src="./loaderInLine.html"></partial>
+              </div>
+
+              <div id="textSetResponse" class="textResponseRole mt-3 text-center"></div>
+
+
+            </div>
           </div>
-          <div class="details-container">
-            <div class="row">
-              <div class="col-12 px-1">
-                <div class="title-column">
+        </div>
+      </div>
+
+      <div id="details-role" class="details-list mt-3 d-none">
+        <div class="header-details d-flex justify-content-between mb-3">
+          <h4 class="">Role details</h4>
+          <button id="close-role-details" onclick="closeRoleDetails()">Go back</button>
+        </div>
+        <div class="details-container">
+          <div class="row">
+            
+            <div class="col-12 px-1">
+                <div class="form">
                   <h5>Information</h5>
-                </div>
-                <div class="content role mt-3">
-                  <ul id="ul-info-roles">
+                  <div class="content">
+                    <ul id="ul-info-roles">
                     <!-- li active role -->
-                  </ul>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
               <div class="col-12 col-sm-6 mt-3 mt-md-0 px-1">
-                <div class="title-column">
+                <div class="form">
                   <h5>Active Permissions +</h5>
-                </div>
-                <div class="content role mt-3">
-                  <ul id="ul-active-permissions">
-                    <!-- li active role -->
-                  </ul>
+                  <div class="list">
+                    <ul id="ul-active-permissions">
+                      <!-- li active role -->
+                    </ul>
+                  </div>
                 </div>
               </div>
 
 
               <div class="col-12 col-sm-6 my-3 my-md-0 px-1">
-                <div class="title-column">
+                <div class="form">
                   <h5>Aviable Permissions -</h5>
-                </div>
-                <div class="content role mt-3">
-                  <ul id="ul-aviable-permissions">
-                    <!-- li aviable role -->
-                  </ul>
+                  <div class="list">
+                    <ul id="ul-aviable-permissions">
+                      <!-- li aviable role -->
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div id="addRole" class="addRole d-lg-flex">
-          <div class="from-permission col-12 col-lg-6">
-            <h4 class="text-center">Add new Role</h4>
-            <div class="form-action-permission">
-              <div class="form-permissions-container">
-                <label for="roleName">Role name:</label>
-                <input type="text" name="roleName" id="roleName">
-                <button id="btnAddRole">Create</button>
-
-                <div id="loader-newRole" class="loader-container d-none d-flex justify-content-center align-items-center">
-                  <partial src="./loaderInLine.html"></partial>
-                </div>
-
-                <div id="textAddResponse" class="textResponseRole mt-3 text-center"></div>
-              </div>
-            </div>
-          </div>
-  
-          
-          <div class="from-permission mt-3 mt-lg-0 ps-lg-3 col-12 col-lg-6">
-            <h4 class="text-center">Set role name</h4>
-            <div class="form-action-permission">
-              <div class="form-permissions-container">
-                <label for="roleId">Role id:</label>
-                <input type="text" name="roleId" id="roleId">
-      
-                <label for="setRoleName">New name:</label>
-                <input type="text" name="setRoleName" id="setRoleName">
-      
-                <button id="btnSetRole">Set Role</button>
-
-                <div id="loader-setRole" class="loader-container d-none d-flex justify-content-center align-items-center">
-                  <partial src="./loaderInLine.html"></partial>
-                </div>
-
-                <div id="textSetResponse" class="textResponseRole mt-3 text-center"></div>
-  
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>

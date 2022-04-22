@@ -1,3 +1,14 @@
+.title-section{
+  background-color: #4259c0;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem 1rem 0 0;
+}
+// .roles-table{
+//   // height: 80vh;
+//   margin-bottom: 2rem;
+// }
+
 .results-table{
   height: 60vh;
   overflow-y: auto;
@@ -19,7 +30,7 @@
       border-radius: 30px;
       p{
         width: 100%;
-        margin: .1rem 0;
+        margin: .2rem 0;
         background-color: #fff;
         border-right: 1px solid #dedede;
         word-break: break-all;
@@ -27,22 +38,43 @@
         align-items: center;
       }
       p:first-child{
-        border-radius: 15px 0 0 15px;
+        border-radius: 10px 0 0 10px;
       }
       p:last-child{
-        border-radius: 0 15px 15px 0;
-        border-right: 1.1rem solid #D8D8D8;
+        border-radius: 0 10px 10px 0;
+        border-right: 0.8rem solid #D8D8D8;
         width: 16rem;
       }
+
+      label {
+        width: 100%;
+        margin: 0.2rem 0;
+        background-color: #fff;
+        border-right: 1px solid #dedede;
+        word-break: break-all;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: large;
+      }
+      label:first-child {
+        border-radius: 10px 0 0 10px;
+      }
+      label:last-child {
+        border-radius: 0 10px 10px 0;
+        border-right: 0.8rem solid #D8D8D8;
+        width: 16rem;
+      }
+
       button{
         border: none;
-        background-color: rgb(189, 0, 0);
+        background-color: #000094;
         color: #fff;
         border-radius: 10px;
         padding: .2rem .75rem;
       }
       button:hover{
-        background-color: rgb(148, 0, 0);
+        background-color: #6c6cff;
       }
     }
     .table-body:hover{
@@ -51,13 +83,3 @@
   }
 }
 
-.title-roles{
-  background-color: #4259c0;
-  color: #fff;
-  padding: 1rem;
-  border-radius: 5px 5px 0 0;
-}
-.roles-table{
-  // height: 80vh;
-  margin-bottom: 2rem;
-}

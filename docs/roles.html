@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="./css/loaderInLine.css" />
         <link rel="stylesheet" href="./css/searchBar&Alphabet.css" />
         <link rel="stylesheet" href="./css/resultsTable.css" />
-        <link rel="stylesheet" href="./css/detailsList.css" />
+        <!--<link rel="stylesheet" href="./css/detailsList.css" />-->
         <link rel="stylesheet" href="./css/mediaQuerys.css" />
-        <link rel="stylesheet" href="./css/permissions.css" />
+        <link rel="stylesheet" href="./css/form.css" />
         <link rel="icon" href="./img/icon.png" />
         <title>Access Control Tool</title>
     </head>
@@ -29,12 +29,10 @@
                 <div id="sidebarMenu" class="sidebarMenu col-12 col-lg-3">
                     <nav class="d-flex flex-column">
                         <div id="btnDropDown" class="btnDropDown"> <i class="fa-solid fa-arrow-right-long"></i>
-
                         </div>
                         <div class="header-nav d-flex justify-content-center align-items-center">
                             <div class="apps dropdown"> <i class="fa-solid fa-grip dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-bs-toggle="dropdown" aria-expanded="false"></i>
-
                                 <ul class="dropdown-menu"
                                 aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="#">Action</a>
@@ -49,49 +47,73 @@
                                 </ul>
                             </div>
                             <div class="logo"> <a href="/">
-          <img src="https://aeronexllc.com/images/logo@2x.png" alt="logo">
-        </a>
 
+          <img src="https://aeronexllc.com/images/logo@2x.png" alt="logo">
+
+        </a>
                             </div>
                         </div>
                         <ul id="ulList">
                             <li>
-                                <div id="itemMenu" class="item"> <i><img data-userMenu="itemMenu" src="./img/adduser.png" alt="" width="30"></i>
- <span>
-            <p data-userMenu="itemMenu">ADMIN USERS</p>
-            <div class="subItems">
-              <ul>
-                <li id="subItemUser">
-                  <a href="./users.html">Users</a>
-                </li>
-                <li id="subItemRoles">
-                  <a href="./roles.html">Roles</a>
-                </li>
-                <li id="subItemNewPermission">
-                  <a href="./permissions.html">Permissions</a>
-                </li>
-              </ul>
-            </div>
-          </span>
+                                <div id="itemMenu" class="item"> <i><img data-userMenu="itemMenu" src="./img/adduser.png" alt="" width="30"></i> <span>
 
+            <p data-userMenu="itemMenu">ADMIN USERS</p>
+
+            <div class="subItems">
+
+              <ul>
+
+                <li id="subItemUser">
+
+                  <a href="./users.html">Users</a>
+
+                </li>
+
+                <li id="subItemRoles">
+
+                  <a href="./roles.html">Roles</a>
+
+                </li>
+
+                <li id="subItemNewPermission">
+
+                  <a href="./permissions.html">Permissions</a>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+          </span>
                                 </div>
                             </li>
                             <li>
-                                <div class="item"> <i><img src="./img/message.png" alt="" width="30"></i>
- <span>
-            <p>Itinerary</p>
-            <div class="subItems">
-              <ul>
-                <li class="">
-                  <a href="#">Item</a>
-                </li>
-                <li>
-                  <a href="#">Item</a>
-                </li>
-              </ul>
-            </div>
-          </span>
+                                <div class="item"> <i><img src="./img/message.png" alt="" width="30"></i> <span>
 
+            <p>Itinerary</p>
+
+            <div class="subItems">
+
+              <ul>
+
+                <li class="">
+
+                  <a href="#">Item</a>
+
+                </li>
+
+                <li>
+
+                  <a href="#">Item</a>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+          </span>
                                 </div>
                             </li>
                         </ul>
@@ -100,7 +122,6 @@
                 <div id="content" class="col-12 col-lg-9">
                     <header class="container">
                          <h1>Access Control tool V1 role</h1>
-
                         <button>Log out</button>
                     </header>
                     <div class="container-fluid position-relative users-container-main">
@@ -114,68 +135,21 @@
                             <div></div>
                             <div></div>
                         </div>
-                         <h4 class="text-center title-roles mt-3">Roles</h4>
-
-                        <div id="table-container" class="results-table roles-table">
+                         <h4 class="text-center title-section mt-3">Roles</h4>
+                        <div id="table-container" class="results-table">
                             <div id="table-roles" class="table">
                                 <div class="table-head d-flex justify-content-between">
                                     <p>Role name</p>
                                     <p>Role id</p>
                                     <p>Action</p>
                                 </div>
-                                <!-- table body -->
                             </div>
                         </div>
-                        <div id="details-role" class="details-list mt-3 d-none">
-                            <div class="header-details d-flex justify-content-between mb-3">
-                                 <h4 class="">Role details</h4>
-
-                                <button id="close-role-details">Go back</button>
-                            </div>
-                            <div class="details-container">
-                                <div class="row">
-                                    <div class="col-12 px-1">
-                                        <div class="title-column">
-                                             <h5>Information</h5>
-
-                                        </div>
-                                        <div class="content role mt-3">
-                                            <ul id="ul-info-roles">
-                                                <!-- li active role -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 mt-3 mt-md-0 px-1">
-                                        <div class="title-column">
-                                             <h5>Active Permissions +</h5>
-
-                                        </div>
-                                        <div class="content role mt-3">
-                                            <ul id="ul-active-permissions">
-                                                <!-- li active role -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 my-3 my-md-0 px-1">
-                                        <div class="title-column">
-                                             <h5>Aviable Permissions -</h5>
-
-                                        </div>
-                                        <div class="content role mt-3">
-                                            <ul id="ul-aviable-permissions">
-                                                <!-- li aviable role -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="addRole" class="addRole d-lg-flex">
-                            <div class="from-permission col-12 col-lg-6">
-                                 <h4 class="text-center">Add new Role</h4>
-
-                                <div class="form-action-permission">
-                                    <div class="form-permissions-container">
+                        <div id="addRole" class="d-md-flex">
+                            <div class="col-md-6">
+                                <div class="form">
+                                     <h4>Add new Role</h4>
+                                    <div class="fieldbox">
                                         <label for="roleName">Role name:</label>
                                         <input type="text" name="roleName" id="roleName">
                                         <button id="btnAddRole">Create</button>
@@ -191,11 +165,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="from-permission mt-3 mt-lg-0 ps-lg-3 col-12 col-lg-6">
-                                 <h4 class="text-center">Set role name</h4>
-
-                                <div class="form-action-permission">
-                                    <div class="form-permissions-container">
+                            <div class="col-md-6">
+                                <div class="form">
+                                     <h4>Set role name</h4>
+                                    <div class="fieldbox">
                                         <label for="roleId">Role id:</label>
                                         <input type="text" name="roleId" id="roleId">
                                         <label for="setRoleName">New name:</label>
@@ -214,12 +187,53 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="details-role" class="details-list mt-3 d-none">
+                            <div class="header-details d-flex justify-content-between mb-3">
+                                 <h4 class="">Role details</h4>
+                                <button id="close-role-details" onclick="closeRoleDetails()">Go back</button>
+                            </div>
+                            <div class="details-container">
+                                <div class="row">
+                                    <div class="col-12 px-1">
+                                        <div class="form">
+                                             <h5>Information</h5>
+                                            <div class="content">
+                                                <ul id="ul-info-roles">
+                                                    <!-- li active role -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mt-3 mt-md-0 px-1">
+                                        <div class="form">
+                                             <h5>Active Permissions +</h5>
+                                            <div class="list">
+                                                <ul id="ul-active-permissions">
+                                                    <!-- li active role -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 my-3 my-md-0 px-1">
+                                        <div class="form">
+                                             <h5>Aviable Permissions -</h5>
+                                            <div class="list">
+                                                <ul id="ul-aviable-permissions">
+                                                    <!-- li aviable role -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
         <footer class="footer container text-center"></footer>
         <script src="./js/all.js"></script>
+        <!--<script src="./js/TokenCall.js"></script>-->
     </body>
 
 </html>

@@ -1,24 +1,33 @@
+const USERAPI = 'Users/User'
+const UPDTUSERROLEAPI = 'Users/User/UpdateUserRole/'
+//let userId;
+
 localStorage.setItem('search', 'A')
 
-async function search(key) {
-
-  SetDisplayById('loader', 'block');
+function searchUsers(key){
+  const searchUser = document.getElementById('searchUser')
+  let typingtimer = null;
 
   let getUsers;
   let getUsersByStartLetter
   key.value ? getUsers = key.value : key.id ? getUsers = key.id : getUsers = key
+  pagination(getUsers)
+  SetDisplayByElement(loader, 'block');
+  search(getUsers).then(response => { SetDisplayByElement(loader, 'none') })
+}
+
+async function search(text) {
 
   //Retrieve the Token
   let token2 = await NetGetToken();
 
   var url = new URL(USERAPI, AdminApiUrl)
-  var url2 = new URL(`${USERAPI}?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`, AdminApiUrl)
+  var url2 = new URL(`${USERAPI}?search="displayName:${text}"&filter=startswith(displayName,'${text}')`, AdminApiUrl)
 
-  getUsers.length > 0 ?
+  text.length > 0 ?
       getUsersByStartLetter = await (fetch(url2.href, { headers: { "Apikey": token2 } })): //`${urlApi}/?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`)):
       getUsersByStartLetter = await (fetch(url.href, { headers: { "Apikey": token2 } }))
-  pagination(getUsers)
-
+ 
   closeUserDetails()
   let table = document.getElementById('table-users')
 
@@ -28,7 +37,6 @@ async function search(key) {
       }
   }
 
-  SetDisplayById('loader', 'none');
   if (!(getUsersByStartLetter == null) && getUsersByStartLetter.ok) {
       let content = await getUsersByStartLetter.json()
 
@@ -36,6 +44,7 @@ async function search(key) {
   }
 }
 
+/*
 async function search_old(letter){
   closeUserDetails()
   const loader = document.getElementById('loader')
@@ -73,7 +82,7 @@ async function search_old(letter){
     showUsers(content.data)
   }
 }
-
+*/
 
 
 const showUsers = (data)=>{

@@ -1,4 +1,5 @@
 let userId;
+
 document.addEventListener('click', e =>{
   if(e.target.dataset.id) openDetails(e.target.dataset.id);
   if(e.target.id === 'close-user-details') closeUserDetails()
