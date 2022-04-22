@@ -12,71 +12,70 @@
 
         <partial src="./loader.html"></partial>
 
-        <h4 class="text-center title-section mt-3">Roles</h4>
 
 
 
 
-        <div id="table-container" class="results-table">
-          <div id="table-roles" class="table">
+        <div id="role-main">
+          <div id="table-container" class="results-table">
+            <h4 class="text-center title-section mt-3">Roles</h4>
+            <div id="table-roles" class="table">
               <div class="table-head d-flex justify-content-between">
                   <p>Role name</p>
                   <p>Role id</p>
                   <p>Action</p>
               </div>
+            </div>
           </div>
-      </div>
 
-      <div id="addRole" class="d-md-flex">
-        <div class="col-md-6">
-          <div class="form">
-            <h4>Add new Role</h4>
-            <div class="fieldbox">
-              <label for="roleName">Role name:</label>
-              <input type="text" name="roleName" id="roleName">
-              <button id="btnAddRole">Create</button>
+          <div id="addRole" class="row">
+            <div class="col-md-6">
+              <div class="form">
+                <h5>Add new Role</h5>
+                <div class="fieldbox">
+                  <label for="roleName">Role name:</label>
+                  <input type="text" name="roleName" id="roleName">
+                  <button id="btnAddRole">Create</button>
 
-              <div id="loader-newRole" class="loader-container d-none d-flex justify-content-center align-items-center">
-                <partial src="./loaderInLine.html"></partial>
+                  <div id="loader-newRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                    <partial src="./loaderInLine.html"></partial>
+                  </div>
+                  <div id="textAddResponse" class="textResponseRole mt-3 text-center"></div>
+                </div>
               </div>
-              <div id="textAddResponse" class="textResponseRole mt-3 text-center"></div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form">
+                <h5>Set role name</h5>
+                <div class="fieldbox">
+                  <label for="roleId">Role id:</label>
+                  <input type="text" name="roleId" id="roleId">
+    
+                  <label for="setRoleName">New name:</label>
+                  <input type="text" name="setRoleName" id="setRoleName">
+                  <button id="btnSetRole">Set Role</button>
+
+                  <div id="loader-setRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                    <partial src="./loaderInLine.html"></partial>
+                  </div>
+                  <div id="textSetResponse" class="textResponseRole mt-3 text-center"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-6">
-          <div class="form">
-            <h4>Set role name</h4>
-            <div class="fieldbox">
-              <label for="roleId">Role id:</label>
-              <input type="text" name="roleId" id="roleId">
-    
-              <label for="setRoleName">New name:</label>
-              <input type="text" name="setRoleName" id="setRoleName">
-    
-              <button id="btnSetRole">Set Role</button>
-
-              <div id="loader-setRole" class="loader-container d-none d-flex justify-content-center align-items-center">
-                <partial src="./loaderInLine.html"></partial>
-              </div>
-
-              <div id="textSetResponse" class="textResponseRole mt-3 text-center"></div>
-
-
-            </div>
+        <div id="details-role" class="details-list mt-3 d-none">
+          <div class="header-details d-flex justify-content-between mb-3">
+            <h4 class="">Role details</h4>
+            <button id="close-role-details" onclick="closeRoleDetails()">Go back</button>
           </div>
-        </div>
-      </div>
 
-      <div id="details-role" class="details-list mt-3 d-none">
-        <div class="header-details d-flex justify-content-between mb-3">
-          <h4 class="">Role details</h4>
-          <button id="close-role-details" onclick="closeRoleDetails()">Go back</button>
-        </div>
-        <div class="details-container">
-          <div class="row">
+
+          <div class="details-container">
+            <div class="row">
             
-            <div class="col-12 px-1">
+              <div class="col-12 col-md-4 px-1">
                 <div class="form">
                   <h5>Information</h5>
                   <div class="content">
@@ -87,7 +86,7 @@
                 </div>
               </div>
 
-              <div class="col-12 col-sm-6 mt-3 mt-md-0 px-1">
+              <div class="col-12 col-md-4 px-1">
                 <div class="form">
                   <h5>Active Permissions +</h5>
                   <div class="list">
@@ -99,11 +98,11 @@
               </div>
 
 
-              <div class="col-12 col-sm-6 my-3 my-md-0 px-1">
+              <div class="col-12 col-md-4 px-1">
                 <div class="form">
                   <h5>Aviable Permissions -</h5>
                   <div class="list">
-                    <ul id="ul-aviable-permissions">
+                    <ul id="ul-available-permissions">
                       <!-- li aviable role -->
                     </ul>
                   </div>

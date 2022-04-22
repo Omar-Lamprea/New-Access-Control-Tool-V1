@@ -9,7 +9,7 @@ function roleDetails(){
 
   })
 
-  let tableContainer = document.getElementById('table-container')
+  let roleMainContainer = document.getElementById('role-main')
   let details = document.getElementById('details-role')
   let loader = document.getElementById('loader')
   let adminRole = document.getElementById('addRole')
@@ -19,7 +19,7 @@ function roleDetails(){
     const response = await fetch(`${urlRolesApi}/${id}`)
     if (response.ok) {
 
-      tableContainer.classList.add('d-none')
+      roleMainContainer.classList.add('d-none')
       details.classList.remove('d-none')
       loader.classList.add('d-none')
 
@@ -31,8 +31,8 @@ function roleDetails(){
       roleId = content.data.roleId
       let ulList = document.getElementById('ul-role-details')
       let ulInfoRole = document.getElementById('ul-info-roles')
-      let ulAcvidePermission = document.getElementById('ul-active-permissions')
-      let ulAviablePermission = document.getElementById('ul-aviable-permissions')
+      let ulActivePermission = document.getElementById('ul-active-permissions')
+      let ulAvailablePermission = document.getElementById('ul-available-permissions')
 
 
       const liInfoRole = `
@@ -41,12 +41,12 @@ function roleDetails(){
       ulInfoRole.innerHTML += liInfoRole
 
       let activePermission = []
-      let aviablePermission = []
+      let availablePermission = []
       content.data.persmisions.forEach(details => {
 
         details.isActive 
           ? activePermission.push(details)
-          : aviablePermission.push(details)
+          : availablePermission.push(details)
 
         // let li = `
         //   <li>name: <span>${details.name}</span></li>
@@ -70,10 +70,10 @@ function roleDetails(){
         // <li>id: <span>${prs.id}</span></li>
         // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
 
-        ulAcvidePermission.innerHTML += liActivePrs
+        ulActivePermission.innerHTML += liActivePrs
       })
 
-      aviablePermission.forEach(prs => {
+      availablePermission.forEach(prs => {
         let liAviablePrs = `
           <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
             <p>
@@ -88,7 +88,7 @@ function roleDetails(){
           // <li>id: <span>${prs.id}</span></li>
           // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
 
-        ulAviablePermission.innerHTML += liAviablePrs
+        ulAvailablePermission.innerHTML += liAviablePrs
       });
     }
   }
@@ -113,6 +113,7 @@ function roleDetails(){
       openRoleDetails(roleId)
     }
   }
+  
   async function activatePermission(prId, roleId){
     // console.log('act', prId, roleId);
     const activate = await fetch(`${urlRolesApi}/UpdateRolePermission`, {
@@ -136,7 +137,7 @@ function roleDetails(){
   //CLEAR DATA
   function closeRoleDetails(){
     clearPermissions()
-    tableContainer.classList.remove('d-none')
+    roleMainContainer.classList.remove('d-none')
     details.classList.add('d-none')
 
     adminRole.classList.add('d-lg-flex')
@@ -144,17 +145,17 @@ function roleDetails(){
   }
   function clearPermissions(){
     let ulInfoList = document.getElementById('ul-info-roles')
-    let ulAcvidePermission = document.getElementById('ul-active-permissions')
-    let ulAviablePermission = document.getElementById('ul-aviable-permissions')
+    let ulActivePermission = document.getElementById('ul-active-permissions')
+    let ulAvailablePermission = document.getElementById('ul-available-permissions')
   
     while(ulInfoList.firstChild){
       ulInfoList.removeChild(ulInfoList.firstChild)
     }
-    while(ulAcvidePermission.firstChild){
-      ulAcvidePermission.removeChild(ulAcvidePermission.firstChild)
+    while(ulActivePermission.firstChild){
+      ulActivePermission.removeChild(ulActivePermission.firstChild)
     }
-    while(ulAviablePermission.firstChild){
-      ulAviablePermission.removeChild(ulAviablePermission.firstChild)
+    while(ulAvailablePermission.firstChild){
+      ulAvailablePermission.removeChild(ulAvailablePermission.firstChild)
     }
   }
 
