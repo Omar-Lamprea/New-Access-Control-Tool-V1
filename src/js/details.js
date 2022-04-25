@@ -1,21 +1,17 @@
-let userId;
-
-document.addEventListener('click', e =>{
-  if(e.target.dataset.id) openDetails(e.target.dataset.id);
-  if(e.target.id === 'close-user-details') closeUserDetails()
-  if(e.target.dataset.activerole) desactivateRole(e.target.dataset.activerole, userId)
-  if(e.target.dataset.aviablerole) activateRole(e.target.dataset.aviablerole, userId)
-})
 
 
 const tableContainer = document.getElementById('table-container')
 const details = document.getElementById('details-user')
-const loader = document.getElementById('loader')
+
 
 async function openDetails(id){
   loader.classList.remove('d-none')
-  
-  const getUser = await fetch(`${urlApi}/${id}`)
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+  const getUser = await fetch(`${url.href}/${id}`, { headers: { "Apikey": token2 } })
   if (getUser.ok) {
     tableContainer.classList.add('d-none')
     loader.classList.add('d-none')
@@ -40,21 +36,19 @@ async function openDetails(id){
           }
       }
     }
-
     showRoles(roles)
-
   }
 }
 
 
 function showRoles(roles){
   const activeRoles = []
-  const aviableRoles= []
+  const availableRoles= []
   const ulActiveRoles = document.getElementById('ul-active-roles')
-  const ulAviableRoles = document.getElementById('ul-aviable-roles')
+  const ulAviableRoles = document.getElementById('ul-available-roles')
 
     roles.forEach(role => {
-      role.isActive ? activeRoles.push(role) : aviableRoles.push(role)
+      role.isActive ? activeRoles.push(role) : availableRoles.push(role)
     });
 
     if (activeRoles.length > 0) {
@@ -74,16 +68,16 @@ function showRoles(roles){
       ulActiveRoles.innerHTML = `<li>no active roles</li>`
     }
 
-    if (aviableRoles.length > 0) {
-      aviableRoles.forEach(aviable => {
+    if (availableRoles.length > 0) {
+      availableRoles.forEach(available => {
         // console.log(aviable);
         const li = `
         <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
           <p>
-            ${aviable.roleName}
+            ${available.roleName}
           </p>
           <span>
-            <i class="fa-solid fa-plus" data-aviablerole="${aviable.roleId}"></i>
+            <i class="fa-solid fa-plus" data-availablerole="${available.roleId}"></i>
           </span>
         </li>`
         ulAviableRoles.innerHTML += li
@@ -100,10 +94,16 @@ function showRoles(roles){
 //update Roles
 async function desactivateRole(roleId, userId){
   // console.log('des', roleId, 'userId:', userId);
-  const desactivate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const desactivate = await fetch(`${url.href}/UpdateUserRole/${userId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
+      "Apikey": token2 
     },
     body: JSON.stringify({
       "roleId": roleId,
@@ -119,10 +119,16 @@ async function desactivateRole(roleId, userId){
 
 async function activateRole(roleId, userId){
   // console.log('act', roleId, 'userId:',userId);
-  const activate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const activate = await fetch(`${url.href}/UpdateUserRole/${userId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
+      "Apikey": token2 
     },
     body: JSON.stringify({
       "roleId": roleId,
@@ -151,12 +157,12 @@ function closeUserDetails(){
 function clearRoles(){
 
   const ulActiveRoles = document.getElementById('ul-active-roles')
-  const ulAviableRoles = document.getElementById('ul-aviable-roles')
+  const ulAvailableRoles = document.getElementById('ul-available-roles')
 
   while(ulActiveRoles.firstChild){
     ulActiveRoles.removeChild(ulActiveRoles.firstChild)
   }
-  while(ulAviableRoles.firstChild){
-    ulAviableRoles.removeChild(ulAviableRoles.firstChild)
+  while(ulAvailableRoles.firstChild){
+    ulAvailableRoles.removeChild(ulAvailableRoles.firstChild)
   }
 }

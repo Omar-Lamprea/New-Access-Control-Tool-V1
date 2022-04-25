@@ -12,24 +12,20 @@
 async function NetGetToken() {
     return "Here_comes_a_token";
 }
-let userId;
-
-document.addEventListener('click', e =>{
-  if(e.target.dataset.id) openDetails(e.target.dataset.id);
-  if(e.target.id === 'close-user-details') closeUserDetails()
-  if(e.target.dataset.activerole) desactivateRole(e.target.dataset.activerole, userId)
-  if(e.target.dataset.aviablerole) activateRole(e.target.dataset.aviablerole, userId)
-})
 
 
 const tableContainer = document.getElementById('table-container')
 const details = document.getElementById('details-user')
-const loader = document.getElementById('loader')
+
 
 async function openDetails(id){
   loader.classList.remove('d-none')
-  
-  const getUser = await fetch(`${urlApi}/${id}`)
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+  const getUser = await fetch(`${url.href}/${id}`, { headers: { "Apikey": token2 } })
   if (getUser.ok) {
     tableContainer.classList.add('d-none')
     loader.classList.add('d-none')
@@ -54,21 +50,19 @@ async function openDetails(id){
           }
       }
     }
-
     showRoles(roles)
-
   }
 }
 
 
 function showRoles(roles){
   const activeRoles = []
-  const aviableRoles= []
+  const availableRoles= []
   const ulActiveRoles = document.getElementById('ul-active-roles')
-  const ulAviableRoles = document.getElementById('ul-aviable-roles')
+  const ulAviableRoles = document.getElementById('ul-available-roles')
 
     roles.forEach(role => {
-      role.isActive ? activeRoles.push(role) : aviableRoles.push(role)
+      role.isActive ? activeRoles.push(role) : availableRoles.push(role)
     });
 
     if (activeRoles.length > 0) {
@@ -88,16 +82,16 @@ function showRoles(roles){
       ulActiveRoles.innerHTML = `<li>no active roles</li>`
     }
 
-    if (aviableRoles.length > 0) {
-      aviableRoles.forEach(aviable => {
+    if (availableRoles.length > 0) {
+      availableRoles.forEach(available => {
         // console.log(aviable);
         const li = `
         <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
           <p>
-            ${aviable.roleName}
+            ${available.roleName}
           </p>
           <span>
-            <i class="fa-solid fa-plus" data-aviablerole="${aviable.roleId}"></i>
+            <i class="fa-solid fa-plus" data-availablerole="${available.roleId}"></i>
           </span>
         </li>`
         ulAviableRoles.innerHTML += li
@@ -114,10 +108,16 @@ function showRoles(roles){
 //update Roles
 async function desactivateRole(roleId, userId){
   // console.log('des', roleId, 'userId:', userId);
-  const desactivate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const desactivate = await fetch(`${url.href}/UpdateUserRole/${userId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
+      "Apikey": token2 
     },
     body: JSON.stringify({
       "roleId": roleId,
@@ -133,10 +133,16 @@ async function desactivateRole(roleId, userId){
 
 async function activateRole(roleId, userId){
   // console.log('act', roleId, 'userId:',userId);
-  const activate = await fetch(`${urlApi}/UpdateUserRole/${userId}`, {
+  var url = new URL(USERAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const activate = await fetch(`${url.href}/UpdateUserRole/${userId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
+      "Apikey": token2 
     },
     body: JSON.stringify({
       "roleId": roleId,
@@ -165,13 +171,13 @@ function closeUserDetails(){
 function clearRoles(){
 
   const ulActiveRoles = document.getElementById('ul-active-roles')
-  const ulAviableRoles = document.getElementById('ul-aviable-roles')
+  const ulAvailableRoles = document.getElementById('ul-available-roles')
 
   while(ulActiveRoles.firstChild){
     ulActiveRoles.removeChild(ulActiveRoles.firstChild)
   }
-  while(ulAviableRoles.firstChild){
-    ulAviableRoles.removeChild(ulAviableRoles.firstChild)
+  while(ulAvailableRoles.firstChild){
+    ulAvailableRoles.removeChild(ulAvailableRoles.firstChild)
   }
 }
 const menu = ()=>{
@@ -281,22 +287,42 @@ menu()
 // const urlApi = 'https://acsadmin.azurewebsites.net/api/User'
 
 //Test:
-const urlApi = 'https://acsadmin.azurewebsites.net/api/test/Users/user'
-const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/test/Users/role'
+//const urlApi = 'https://acsadmin.azurewebsites.net/api/test/Users/user'
+//const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/test/Users/role'
 const urlPermission = 'https://acsadmin.azurewebsites.net/api/test/Users/permission'
 
 const AdminApiUrl = "https://acsadmin.azurewebsites.net/api/test/";
 
+const USERAPI = 'Users/User'
+const UPDTUSERROLEAPI = 'Users/User/UpdateUserRole'
+const SEARCHROLEAPI = 'Users/Role';
+
+let userId;
+let roleId;
+
 
 if (window.location.href.includes('/users')) {
-  ///pagination('')  //pagination se llama dentro de search
-  //searchInput()    //searchInput reemplazado por onclick en cada letra
   searchUsers('')
+  document.addEventListener('click', e =>{
+    if(e.target.dataset.id) openDetails(e.target.dataset.id);
+    if(e.target.id === 'close-user-details') closeUserDetails()
+    if(e.target.dataset.activerole) desactivateRole(e.target.dataset.activerole, userId)
+    if(e.target.dataset.availablerole) activateRole(e.target.dataset.availablerole, userId)
+  })
 }
+
 if (window.location.href.includes('/roles')) {
   searchRoles()
   adminRoles()
+
+  document.addEventListener('click', e =>{
+    if(e.target.dataset.roleid) openRoleDetails(e.target.dataset.roleid);
+    if(e.target.id === 'close-role-details') closeRoleDetails()
+    if(e.target.dataset.activepermission) desactivatePermission(e.target.dataset.activepermission, roleId)
+    if(e.target.dataset.aviablepermission) activatePermission(e.target.dataset.aviablepermission, roleId)
+  })
 }
+
 if (window.location.href.includes('/permissions')) {
   addPermission()
 }
@@ -406,170 +432,178 @@ function addPermission(){
 }
 
 
-function roleDetails(){
-  let roleId;
-  document.addEventListener('click', e =>{
-    if(e.target.dataset.roleid) openRoleDetails(e.target.dataset.roleid);
-    if(e.target.id === 'close-role-details') closeRoleDetails()
-    if(e.target.dataset.activepermission) desactivatePermission(e.target.dataset.activepermission, roleId)
-    if(e.target.dataset.aviablepermission) activatePermission(e.target.dataset.aviablepermission, roleId)
+// Juntar el script en una funcion puede ser util para poder activarlo solo en la pagina deseada
+// En Blazor no esta la posibilidad de ejecutar scripts especificos para cada pagina, 
+// por lo que en ese caso es mejor manejarlo como una libreria general.
+// Todos los event listeners fueron movidos a un archivo consolidado.
 
 
-  })
+let roleMainContainer = document.getElementById('role-main')
 
-  let roleMainContainer = document.getElementById('role-main')
-  let details = document.getElementById('details-role')
-  let loader = document.getElementById('loader')
-  let adminRole = document.getElementById('addRole')
+//let loader = document.getElementById('loader')
+let adminRole = document.getElementById('addRole')
+let roledetails = document.getElementById('details-role')
 
-  async function openRoleDetails(id){
+async function openRoleDetails(id) {
+    var url = new URL(SEARCHROLEAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
     loader.classList.remove('d-none')
-    const response = await fetch(`${urlRolesApi}/${id}`)
+    const response = await fetch(`${url.href}/${id}`, { headers: { "Apikey": token2 } })
     if (response.ok) {
 
-      roleMainContainer.classList.add('d-none')
-      details.classList.remove('d-none')
-      loader.classList.add('d-none')
+        roleMainContainer.classList.add('d-none')
+        roledetails.classList.remove('d-none')
+        loader.classList.add('d-none')
 
-      adminRole.classList.remove('d-lg-flex')
-      adminRole.classList.add('d-none')
-
-
-      let content = await response.json()
-      roleId = content.data.roleId
-      let ulList = document.getElementById('ul-role-details')
-      let ulInfoRole = document.getElementById('ul-info-roles')
-      let ulActivePermission = document.getElementById('ul-active-permissions')
-      let ulAvailablePermission = document.getElementById('ul-available-permissions')
+        adminRole.classList.remove('d-lg-flex')
+        adminRole.classList.add('d-none')
 
 
-      const liInfoRole = `
+        let content = await response.json()
+        roleId = content.data.roleId
+        let ulList = document.getElementById('ul-role-details')
+        let ulInfoRole = document.getElementById('ul-info-roles')
+        let ulActivePermission = document.getElementById('ul-active-permissions')
+        let ulAvailablePermission = document.getElementById('ul-available-permissions')
+
+
+        const liInfoRole = `
         <li>Role name: <span> ${content.data.roleName}</span></li>
         <li>Role id: <span> ${content.data.roleId}</span></li>`
-      ulInfoRole.innerHTML += liInfoRole
+        ulInfoRole.innerHTML += liInfoRole
 
-      let activePermission = []
-      let availablePermission = []
-      content.data.persmisions.forEach(details => {
+        let activePermission = []
+        let availablePermission = []
+        content.data.persmisions.forEach(details => {
 
-        details.isActive 
-          ? activePermission.push(details)
-          : availablePermission.push(details)
+            details.isActive
+                ? activePermission.push(details)
+                : availablePermission.push(details)
 
-        // let li = `
-        //   <li>name: <span>${details.name}</span></li>
-        //   <li>id: <span>${details.id}</span></li>
-        //   <li style="border-bottom: 1px solid grey">active: <span>${details.isActive}</span></li>
-        //   `
-        // ulList.innerHTML += li
-      });
-      activePermission.forEach(prs => {
-        let liActivePrs = `
+            // let li = `
+            //   <li>name: <span>${details.name}</span></li>
+            //   <li>id: <span>${details.id}</span></li>
+            //   <li style="border-bottom: 1px solid grey">active: <span>${details.isActive}</span></li>
+            //   `
+            // ulList.innerHTML += li
+        });
+        activePermission.forEach(prs => {
+            let liActivePrs = `
         <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
           <p>
             ${prs.name}
           </p>
           <span>
-            <i class="fa-solid fa-minus" data-activepermission="${prs.id}"></i>
+            <i class="oi oi-minus" data-activepermission="${prs.id}"></i>
           </span>
         </li>
         `
-        // <li>name: <span>${prs.name}</span></li>
-        // <li>id: <span>${prs.id}</span></li>
-        // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
+            // <li>name: <span>${prs.name}</span></li>
+            // <li>id: <span>${prs.id}</span></li>
+            // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
 
-        ulActivePermission.innerHTML += liActivePrs
-      })
+            ulActivePermission.innerHTML += liActivePrs
+        })
 
-      availablePermission.forEach(prs => {
-        let liAviablePrs = `
+        availablePermission.forEach(prs => {
+            let liAviablePrs = `
           <li style="border-bottom: 1px solid rgb(197, 197, 197)" class="d-flex justify-content-between align-items-center">
             <p>
               ${prs.name}
             </p>
             <span>
-              <i class="fa-solid fa-plus" data-aviablepermission="${prs.id}"></i>
+              <i class="oi oi-plus" data-aviablepermission="${prs.id}"></i>
             </span>
           </li>
         `
-          // <li>name: <span>${prs.name}</span></li>
-          // <li>id: <span>${prs.id}</span></li>
-          // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
+            // <li>name: <span>${prs.name}</span></li>
+            // <li>id: <span>${prs.id}</span></li>
+            // <li style="border-bottom: 1px solid rgb(197, 197, 197)">active: <span>${prs.isActive}</span></li>
 
-        ulAvailablePermission.innerHTML += liAviablePrs
-      });
+            ulAvailablePermission.innerHTML += liAviablePrs
+        });
     }
-  }
-  
-  //UPDATE PERMISSIONS
-  async function desactivatePermission (prId, roleId){
+}
+
+//UPDATE PERMISSIONS
+async function desactivatePermission(prId, roleId) {
     // console.log('des', prId, roleId);
-    const desactivate = await fetch(`${urlRolesApi}/UpdateRolePermission`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        "roleId": roleId,
-        "permissionId": prId,
-        "action": "delete"
-      })
+    var url = new URL(SEARCHROLEAPI, AdminApiUrl)
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const desactivate = await fetch(`${url.href}/UpdateRolePermission`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Apikey": token2
+        },
+        body: JSON.stringify({
+            "roleId": roleId,
+            "permissionId": prId,
+            "action": "delete"
+        })
     })
     if (desactivate.ok) {
-      const content = await desactivate.json()
-      clearPermissions()
-      openRoleDetails(roleId)
+        const content = await desactivate.json()
+        clearPermissions()
+        openRoleDetails(roleId)
     }
-  }
-  
-  async function activatePermission(prId, roleId){
+}
+
+async function activatePermission(prId, roleId) {
     // console.log('act', prId, roleId);
-    const activate = await fetch(`${urlRolesApi}/UpdateRolePermission`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        "roleId": roleId,
-        "permissionId": prId,
-        "action": "insert"
-      })
+    var url = new URL(SEARCHROLEAPI, AdminApiUrl)
+
+    //Retrieve the Token
+    let token2 = await NetGetToken();
+
+    const activate = await fetch(`${url.href}/UpdateRolePermission`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            "Apikey": token2
+        },
+        body: JSON.stringify({
+            "roleId": roleId,
+            "permissionId": prId,
+            "action": "insert"
+        })
     })
     if (activate.ok) {
-      const content = await activate.json()
-      clearPermissions()
-      openRoleDetails(roleId)
+        const content = await activate.json()
+        clearPermissions()
+        openRoleDetails(roleId)
     }
-  }
+}
 
-  //CLEAR DATA
-  function closeRoleDetails(){
+//CLEAR DATA
+function closeRoleDetails() {
     clearPermissions()
     roleMainContainer.classList.remove('d-none')
-    details.classList.add('d-none')
+    roledetails.classList.add('d-none')
 
     adminRole.classList.add('d-lg-flex')
     adminRole.classList.remove('d-none')
-  }
-  function clearPermissions(){
+}
+function clearPermissions() {
     let ulInfoList = document.getElementById('ul-info-roles')
     let ulActivePermission = document.getElementById('ul-active-permissions')
     let ulAvailablePermission = document.getElementById('ul-available-permissions')
-  
-    while(ulInfoList.firstChild){
-      ulInfoList.removeChild(ulInfoList.firstChild)
-    }
-    while(ulActivePermission.firstChild){
-      ulActivePermission.removeChild(ulActivePermission.firstChild)
-    }
-    while(ulAvailablePermission.firstChild){
-      ulAvailablePermission.removeChild(ulAvailablePermission.firstChild)
-    }
-  }
 
+    while (ulInfoList.firstChild) {
+        ulInfoList.removeChild(ulInfoList.firstChild)
+    }
+    while (ulActivePermission.firstChild) {
+        ulActivePermission.removeChild(ulActivePermission.firstChild)
+    }
+    while (ulAvailablePermission.firstChild) {
+        ulAvailablePermission.removeChild(ulAvailablePermission.firstChild)
+    }
 }
-roleDetails()
-
 function searchInput(){
   const searchUser = document.getElementById('searchUser')
   let typingtimer = null;
@@ -593,8 +627,15 @@ function searchInput(){
     }
   })
 }
+
+
 async function searchRoles(){
-  const response = await fetch(`${urlRolesApi}`)
+  var url = new URL(SEARCHROLEAPI, AdminApiUrl)
+
+  //Retrieve the Token
+  let token2 = await NetGetToken();
+
+  const response = await fetch(`${url.href}`, { headers: { "Apikey": token2 } })
   if (response.ok) {
     const content = await response.json()
     const loader = document.getElementById('loader')
@@ -614,9 +655,7 @@ async function searchRoles(){
     });
   }
 }
-const USERAPI = 'Users/User'
-const UPDTUSERROLEAPI = 'Users/User/UpdateUserRole/'
-//let userId;
+
 
 localStorage.setItem('search', 'A')
 
@@ -660,45 +699,6 @@ async function search(text) {
   }
 }
 
-/*
-async function search_old(letter){
-  closeUserDetails()
-  const loader = document.getElementById('loader')
-  const table = document.getElementById('table-users')
-
-  loader.classList.remove('d-none')
-  
-  for (let i = localStorage.getItem('count'); i > 0; i--) {
-    if (table.children[i] !== undefined) {
-      table.removeChild(table.children[i])
-    }
-  }
-
-  let getUsers;
-  letter.id ? getUsers = letter.id : getUsers = letter
-
-  const alphabetList = document.getElementsByClassName('btn-search')
-  for (let i = 0; i < alphabetList.length; i++) {
-    if (getUsers.length === 1) {
-      alphabetList[i].classList.contains('active-search') 
-        ? alphabetList[i].classList.remove('active-search') 
-        : false
-
-      const btnEl = document.getElementById(getUsers)
-      btnEl.classList.add('active-search')
-    }
-  }
-
-
-  const getUsersByStartLetter = await(fetch(`${urlApi}/?search="displayName:${getUsers}"&filter=startswith(displayName,'${getUsers}')`))
-  if (getUsersByStartLetter.ok) {
-    const content = await getUsersByStartLetter.json()
-    
-    loader.classList.add('d-none')
-    showUsers(content.data)
-  }
-}
-*/
 
 
 const showUsers = (data)=>{
