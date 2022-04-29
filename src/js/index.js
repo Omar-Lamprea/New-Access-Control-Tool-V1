@@ -4,13 +4,13 @@
 //Test:
 //const urlApi = 'https://acsadmin.azurewebsites.net/api/test/Users/user'
 //const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/test/Users/role'
-const urlPermission = 'https://acsadmin.azurewebsites.net/api/test/Users/permission'
 
-const AdminApiUrl = "https://acsadmin.azurewebsites.net/api/test/";
+const AdminApiUrl =   'https://acsadmin.azurewebsites.net/api/test/';
 
 const USERAPI = 'Users/User'
 const UPDTUSERROLEAPI = 'Users/User/UpdateUserRole'
 const SEARCHROLEAPI = 'Users/Role';
+const SEARCHPERMISSIONAPI = 'Users/permission'
 
 let userId;
 let roleId;
@@ -39,6 +39,7 @@ if (window.location.href.includes('/roles')) {
 }
 
 if (window.location.href.includes('/permissions')) {
+  searchPermissions()
   addPermission()
 }
 

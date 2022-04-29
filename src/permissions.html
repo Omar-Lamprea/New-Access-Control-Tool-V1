@@ -9,34 +9,53 @@
         <button>Log out</button>
       </header>
       <div class="container-fluid position-relative users-container-main">
-        <!-- <partial src="./loader.html"></partial> -->
 
+        <div class="loaderTable">
+          <partial src="./loader.html"></partial>
+        </div>
         <!----Main View---->
-        <div class="form">
-          <h4>Add new permission</h4>
-          <div class="fieldbox">
-            <label for="permissionName">Permission name:</label>
-            <input type="text" name="permissionName" id="permissionName">
-            <button id="btnAddPermission">Create</button>
-            <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
+
+        <h4 class="text-center title-section mt-3">Permissions</h4>
+        <div id="table-container" class="results-table">
+          <div id="table-permissions" class="table">
+            <div class="table-head d-flex justify-content-between">
+              <p>Permission name</p>
+              <p style="width: 100%;">Permission id</p>
+            </div>
+
           </div>
         </div>
 
+        <div id="addPermission" class="row">
+          <div class="col-md-6">
+            <div class="form">
+              <h4>Add new permission</h4>
+              <div class="fieldbox">
+                <label for="permissionName">Permission name:</label>
+                <input type="text" name="permissionName" id="permissionName">
+                <button id="btnAddPermission">Create</button>
+                <div id="textAddResponse" class="textResponsePermission mt-3 text-center"></div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-6">
+            <div class="form">
+              <h4>Set permission name</h4>
+    
+              <div class="fieldbox">
+                <label for="permissionId">Permission id:</label>
+                <input type="text" name="permissionId" id="permissionId">
         
-        <div class="form mt-3">
-          <h4>Set permission name</h4>
-
-          <div class="fieldbox">
-            <label for="permissionId">Permission id:</label>
-            <input type="text" name="permissionId" id="permissionId">
+                <label for="setPermissionName">new name:</label>
+                <input type="text" name="setPermissionName" id="setPermissionName">
+        
+                <button id="btnSetPermission">Set Permission</button>
+                <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
     
-            <label for="setPermissionName">new name:</label>
-            <input type="text" name="setPermissionName" id="setPermissionName">
     
-            <button id="btnSetPermission">Set Permission</button>
-            <div id="textSetResponse" class="textResponsePermission mt-3 text-center"></div>
-
-
+              </div>
+            </div>
           </div>
         </div>
       </div>

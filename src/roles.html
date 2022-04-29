@@ -10,7 +10,9 @@
       </header>
       <div class="container-fluid position-relative users-container-main">
 
-        <partial src="./loader.html"></partial>
+        <div class="loaderTable">
+          <partial src="./loader.html"></partial>
+        </div>
 
 
 
@@ -18,16 +20,16 @@
         <!----Main View---->
         <div id="role-main">
 
-            <h4 class="text-center title-section mt-3">Roles</h4>
-            <div id="table-container" class="results-table">
-                          <div id="table-roles" class="table">
+          <h4 class="text-center title-section mt-3">Roles</h4>
+          <div id="table-container" class="results-table">
+            <div id="table-roles" class="table">
               <div class="table-head d-flex justify-content-between">
-                  <p>Role name</p>
-                  <p>Role id</p>
-                  <p>Action</p>
+                <p>Role name</p>
+                <p>Role id</p>
+                <p>Action</p>
               </div>
 
-                            </div>
+            </div>
           </div>
 
           <div id="addRole" class="row">
@@ -39,7 +41,8 @@
                   <input type="text" name="roleName" id="roleName">
                   <button id="btnAddRole">Create</button>
 
-                  <div id="loader-newRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                  <div id="loader-newRole"
+                    class="loader-container d-none d-flex justify-content-center align-items-center">
                     <partial src="./loaderInLine.html"></partial>
                   </div>
                   <div id="textAddResponse" class="textResponseRole mt-3 text-center"></div>
@@ -53,12 +56,13 @@
                 <div class="fieldbox">
                   <label for="roleId">Role id:</label>
                   <input type="text" name="roleId" id="roleId">
-    
+
                   <label for="setRoleName">New name:</label>
                   <input type="text" name="setRoleName" id="setRoleName">
                   <button id="btnSetRole">Set Role</button>
 
-                  <div id="loader-setRole" class="loader-container d-none d-flex justify-content-center align-items-center">
+                  <div id="loader-setRole"
+                    class="loader-container d-none d-flex justify-content-center align-items-center">
                     <partial src="./loaderInLine.html"></partial>
                   </div>
                   <div id="textSetResponse" class="textResponseRole mt-3 text-center"></div>
@@ -76,13 +80,13 @@
 
           <div class="details-container">
             <div class="row">
-            
+
               <div class="col-12 col-md-4 px-1">
                 <div class="form">
                   <h5>Information</h5>
                   <div class="content">
                     <ul id="ul-info-roles">
-                    <!-- li active role -->
+                      <!-- li active role -->
                     </ul>
                   </div>
                 </div>

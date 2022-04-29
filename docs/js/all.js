@@ -289,13 +289,13 @@ menu()
 //Test:
 //const urlApi = 'https://acsadmin.azurewebsites.net/api/test/Users/user'
 //const urlRolesApi = 'https://acsadmin.azurewebsites.net/api/test/Users/role'
-const urlPermission = 'https://acsadmin.azurewebsites.net/api/test/Users/permission'
 
-const AdminApiUrl = "https://acsadmin.azurewebsites.net/api/test/";
+const AdminApiUrl =   'https://acsadmin.azurewebsites.net/api/test/';
 
 const USERAPI = 'Users/User'
 const UPDTUSERROLEAPI = 'Users/User/UpdateUserRole'
 const SEARCHROLEAPI = 'Users/Role';
+const SEARCHPERMISSIONAPI = 'Users/permission'
 
 let userId;
 let roleId;
@@ -324,6 +324,7 @@ if (window.location.href.includes('/roles')) {
 }
 
 if (window.location.href.includes('/permissions')) {
+  searchPermissions()
   addPermission()
 }
 
@@ -641,7 +642,7 @@ async function searchRoles(){
     const loader = document.getElementById('loader')
     const table = document.getElementById('table-roles')
 
-    loader.classList.add('d-none')
+    SetDisplayByElement(loader, 'none')
     content.data.query.forEach(role => {
       const row = `
       <div class="table-body d-flex justify-content-between">
@@ -822,4 +823,28 @@ function adminRoles(){
       }
     }
   })
+}
+async function searchPermissions(){
+  var url = new URL(SEARCHPERMISSIONAPI, AdminApiUrl)
+
+  //Retrieve the Token
+  let token2 = await NetGetToken();
+
+  const response = await fetch(`${url.href}`, { headers: { "Apikey": token2 } })
+  if (response.ok) {
+    const content = await response.json()
+
+    const loader = document.getElementById('loader')
+    const table = document.getElementById('table-permissions')
+
+    SetDisplayByElement(loader, 'none')
+    content.data.query.forEach(permission => {
+      const row = `
+      <div class="table-body d-flex justify-content-between">
+        <p class="py-1 pe-1 px-lg-3">${permission.normalizedName}</p>
+        <p class="py-1 pe-1 px-lg-3" style="width: 100%;">${permission.id}</p>
+      </div>`
+      table.innerHTML += row
+    });
+  }
 }
